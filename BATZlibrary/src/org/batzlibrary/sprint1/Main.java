@@ -11,7 +11,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		int countLines = 1;
+		int countLines = 0;
 		String username = "";
 		String password = "";
 		String role = "";
