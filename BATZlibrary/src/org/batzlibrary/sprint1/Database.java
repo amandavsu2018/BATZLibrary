@@ -17,6 +17,7 @@ public class Database {
 			File infile = new File("src/org/batzlibrary/sprint1/database.txt");
 			BufferedReader br = new BufferedReader(new FileReader(infile));
 			this.database = br.readLine();
+			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -31,6 +32,7 @@ public class Database {
 				br.readLine();
 			}
 			this.user = br.readLine();
+			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -45,6 +47,7 @@ public class Database {
 				br.readLine();
 			}
 			this.pass = br.readLine();
+			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
