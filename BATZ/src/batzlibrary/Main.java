@@ -22,18 +22,20 @@ public class Main {
         database = db.dataBase();
 		
         //Variable Names
-        String username, password, locked, status = "", fname = "", lname, street, city, state, zip, phone, email;
+        String username, password, /*locked,*/ status = "", fname = ""; //lname, street, city, state, zip, phone, email;
         boolean sessionOpen = false;
-        String createuser = "", createpass = "", createpin = "", createlocked = "", createstatus = null;
-        String createfname = "", createlname = "", createstreet = "", createcity = "", createstate = "";
-        String createzip = "", createphone = "", createemail = "";
+        //String createuser = "", createpass = "", createpin = "", createlocked = "", createstatus = null;
+       // String createfname = "", createlname = "", createstreet = "", createcity = "", createstate = "";
+       // String createzip = "", createphone = "", createemail = "";
         boolean checkBool = false;
+        
         
         //Start Login 
         System.out.println("Login.\n");
         Scanner scan = new Scanner(System.in);
-        System.out.print("username: ");
+        System.out.print("Username: ");
         username = scan.nextLine();
+  
         
         //Check to see if user exists
         Login lg = new Login();
@@ -41,15 +43,15 @@ public class Main {
         
         if(userlogin == true){
         	System.out.println("User exists\n");
-        	System.out.println("password: ");
+        	System.out.println("Password: ");
         	password = scan.nextLine();
         	checkBool = false;
         	userlogin = lg.checkUserPassword(username, password, checkBool);
         	if(userlogin == true){
-        		System.out.println("username and pw match, LOGIN!");
+        		System.out.println("Username and password match, LOGIN!");
         		sessionOpen = true;
         	} else {
-        		System.out.println("username and pw DO NOT match, Goodbye!");
+        		System.out.println("Username and password DO NOT match, Goodbye!");
         	}
         } else {
         	System.out.println("User does not exist!");
@@ -62,80 +64,22 @@ public class Main {
         System.out.println(fname + "'s status is a " + status + ".");
         
         //use while loop with sessionOpen and timestamp to determine if Login hasn't timed-out
-//  /*
         while(sessionOpen == true){
         	System.out.println("Welcome " + fname + ". What would you like to do?");
         	
         	//stuff to do in here
         	// ***** IF STATUS EQUALS MEMBER
         	if(status.equals("member")){
-        		System.out.println("Your status is a member. Nothing to do yet so logging out.");
+        		Member me = new Member();
+        		me.actionsMe();
         		// ***** IF STATUS EQUALS ASSOCIATE *****
         	} else if(status.equals("associate")){
-        		int choice = 0;
-        		System.out.println("Your status is an associate.");
-        		System.out.println("What would you like to do?\n");
-        		System.out.println("1: Add User to Database.");
-        		System.out.println("2: Exit.");
-        		Scanner choicescan = new Scanner(System.in);
-        		//get the choice
-        		while(true){
-        			try {
-                        choice = Integer.parseInt(choicescan.nextLine());
-                        if(choice == 1){
-                        	break;
-                        } else if(choice == 2){
-                        	break;
-                        }
-                    } catch (NumberFormatException nfe) {
-                        System.out.print("Try again: ");
-                    }
-        		}
-        		
-        		//switch cases
-        		switch(choice){
-        			case 1:
-        				CreateUser cu = new CreateUser();
-        				cu.createUser();
-        				break;
-        			case 2:
-        				break;
-        		}
-        		choicescan.close();
-        		sessionOpen = false;
+        		Associate a = new Associate();
+        		a.actionsA();
         		// ***** IF STATUS EQUALS MANAGER *****
         	} else if(status.equals("manager")){
-        		int choice = 0;
-        		System.out.println("Your status is a manager.");
-        		System.out.println("What would you like to do?\n");
-        		System.out.println("1: Add User to Database.");
-        		System.out.println("2: Exit.");
-        		Scanner choicescan = new Scanner(System.in);
-        		//get the choice
-        		while(true){
-        			try {
-                        choice = Integer.parseInt(choicescan.nextLine());
-                        if(choice == 1){
-                        	break;
-                        } else if(choice == 2){
-                        	break;
-                        }
-                    } catch (NumberFormatException nfe) {
-                        System.out.print("Try again: ");
-                    }
-        		}
-        		
-        		//switch cases
-        		switch(choice){
-        			case 1:
-        				CreateUser cu = new CreateUser();
-        				cu.createUser();
-        				break;
-        			case 2:
-        				break;
-        		}
-        		choicescan.close();
-        		sessionOpen = false;
+        		Manager ma = new Manager();
+        		ma.actionsMa();
         		// ***** STATUS PENDING *****
         	} else {
         		System.out.println("Your membership status is still pending. Please contact an associate.");

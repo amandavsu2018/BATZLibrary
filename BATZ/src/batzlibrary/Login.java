@@ -11,7 +11,6 @@ import java.time.Instant;
 public class Login {
 	Database db = new Database();
 
-
 	public Boolean checkUsername(String user, boolean bool) {
 		bool = true;
 		Database db = new Database();
