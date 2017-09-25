@@ -1,0 +1,3 @@
+jdbc:mariadb://batzlibrary.org/BATZlibrary
+batzlibrary
+XvKk1hl36JLqYLKC
