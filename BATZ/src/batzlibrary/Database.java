@@ -14,7 +14,7 @@ public class Database {
 	
 	public String getDatabase(){
 		try{
-			File infile = new File("src/batzlibary/database.txt");
+			File infile = new File("src/batzlibrary/database.txt");
 			BufferedReader br = new BufferedReader(new FileReader(infile));
 			this.database = br.readLine();
 		} catch (IOException e) {
