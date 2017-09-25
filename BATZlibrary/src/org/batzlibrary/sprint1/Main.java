@@ -143,7 +143,7 @@ public class Main {
         System.out.println("Session closing. Goodbye!");
 // */
         
-/*        
+/*      Zack  
         //TEMPORARY - create users
         System.out.println("");
         System.out.println("Creating a new user in the database.\n");
