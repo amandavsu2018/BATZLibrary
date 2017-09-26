@@ -9,6 +9,9 @@ import java.util.Scanner;
 public class Manager {
 
 	boolean sessionOpen = true;
+	
+	//for passing to createUser() method
+	String userstatus = "manager";
 
 	public Manager() {
 	}
@@ -39,7 +42,7 @@ public class Manager {
 		switch (choice) {
 		case 1:
 			CreateUser cu = new CreateUser();
-			cu.createUser();
+			cu.createUser(userstatus);
 			break;
 		case 2:
 			createBook();

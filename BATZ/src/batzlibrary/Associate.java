@@ -5,6 +5,9 @@ import java.util.Scanner;
 public class Associate /* extends Member */ {
 
 	boolean sessionOpen = true;
+	
+	//for passing to createUser() method
+	String userstatus = "associate";
 
 	public Associate() {
 	}
@@ -33,7 +36,7 @@ public class Associate /* extends Member */ {
 		switch (choice) {
 		case 1:
 			CreateUser cu = new CreateUser();
-			cu.createUser();
+			cu.createUser(userstatus);
 			break;
 		case 2:
 			break;

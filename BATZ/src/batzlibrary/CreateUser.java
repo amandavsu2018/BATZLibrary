@@ -207,7 +207,7 @@ public class CreateUser {
 		return pin;
 	}
 
-	public String assignStatus() {
+	public String assignStatus(String status) {
 		/*
 		 * We need to work on passing a false or true in order to determine if
 		 * case 4 can go through in other words, if associate, case 4 won't go
@@ -219,34 +219,57 @@ public class CreateUser {
 		 */
 		while (true) {
 			int choice = 0;
-			System.out.println(
-					"What status would you like to assign to this user? Enter 1 for member, 2 for associate, or 3 to exit.");
-			Scanner newscan = new Scanner(System.in);
-			choice = newscan.nextInt();
-			switch (choice) {
-			case 1:
-				return "member";
-			case 2:
-				return "associate";
-			case 3:
-				return null;
-			/*
-			 * case 4: if(temp == true){ return "manager"; } else {
-			 * System.out.println("You are not a manger."); }
-			 *
-			 */
-			default:
+			
+			//passed status, if associate then 3 cases, if manager then 4 cases
+			if(status.equals("associate")){
 				System.out.println(
-						"Invalid input. Please choose 1 for member, 2 for associate, 3 to exit, or 4 for manager.");
+						"What status would you like to assign to this user? Enter 1 for member, 2 for associate, or 3 to exit.");
+				Scanner newscan = new Scanner(System.in);
+				choice = newscan.nextInt();
+				switch (choice) {
+				case 1:
+					return "member";
+				case 2:
+					return "associate";
+				case 3:
+					return null;
+				default:
+					System.out.println(
+							"Invalid input. Please choose 1 for member, 2 for associate, or 3 to exit.");
+				}
+			} else if(status.equals("manager")){
+				System.out.println(
+						"What status would you like to assign to this user? Enter 1 for member, 2 for associate, 3 for manager, or 4 to exit.");
+				Scanner newscan = new Scanner(System.in);
+				choice = newscan.nextInt();
+				switch (choice) {
+				case 1:
+					return "member";
+				case 2:
+					return "associate";
+				case 3:
+					return "manager";
+				case 4:
+					return null;
+				/*
+				 * case 4: if(temp == true){ return "manager"; } else {
+				 * System.out.println("You are not a manger."); }
+				 *
+				 */
+				default:
+					System.out.println(
+							"Invalid input. Please choose 1 for member, 2 for associate, 3 for manager, or 4 to exit.");
+				}
 			}
 		}
 	}
 
-	public void createUser() {
+	public void createUser(String status) {
 		String createuser = null;
 		String createpass = "", createpin = "", createlocked = "", createstatus = null;
 		String createfname = "", createlname = "", createstreet = "", createcity = "", createstate = "";
 		String createzip = "", createphone = "", createemail = "";
+		
 		boolean checkBool = false;
 
 		Scanner scan = new Scanner(System.in);
@@ -268,7 +291,7 @@ public class CreateUser {
 		System.out.println("Setting to unlocked");
 		createlocked = "false";
 		System.out.println("Assigning Status");
-		createstatus = assignStatus();
+		createstatus = assignStatus(status);
 		if (createstatus != null) {
 			System.out.println("Enter First Name:");
 			createfname = (scan.nextLine()).trim();
