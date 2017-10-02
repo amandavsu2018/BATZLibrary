@@ -9,8 +9,8 @@ public class Main {
 	//JDBC driver name and database URL
 	static String jdbc_driver = "";
 	static String database = "";
-	static String USER = "batzlibrary";
-	static String PASS = "XvKk1hl36JLqYLKC";
+	static String USER = "";
+	static String PASS = "";
 	
 	public static void main(String[] args) {
 		//Set the JDBC Driver for connecting to MariaDB Database

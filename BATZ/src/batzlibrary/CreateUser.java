@@ -149,6 +149,8 @@ public class CreateUser {
 
 	public String generatePin() {
 		String pin = "";
+		
+		//create the pin here, run the checks below
 		pin = String.format("%04d", random.nextInt(9999));
 		Database db = new Database();
 		String database = new String(db.getDatabase());
@@ -189,12 +191,22 @@ public class CreateUser {
 			e.printStackTrace();
 		}
 
+		/* DEMONSTRATE HERE */
 		// checking if pin exists in ResultSet result
 		try {
+			// blah = 1 for the pointer to ResultSet data
 			int blah = 1;
+			// if there is a result in ResultSet result, print the result
 			if (result.next()) {
+				//This prints the pin
 				System.out.println(result.getString(blah));
+				
+				//temp will equal 0 if result.next() has nothing in the pointer address
+				//else it will contain something other than 0
 				String temp = result.getString(blah);
+				
+				//if temp.equals(0) it will return the generated pin, else generate
+				//new pin because pin already exists in database
 				if (temp.equals(0)) {
 					return pin;
 				} else {
