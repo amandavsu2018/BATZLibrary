@@ -177,21 +177,21 @@ public class Manager {
 			String state = "";
 			Scanner st = new Scanner(System.in);
 			System.out.println("City:");
-			city = st.nextLine();
+			state = st.nextLine();
 			query = "UPDATE users SET user_state = '" + state + "'WHERE user_pin = '" + pin + "'";
 			break;
 		case 9:
 			String zip = "";
 			Scanner zi = new Scanner(System.in);
 			System.out.println("Zip:");
-			city = zi.nextLine();
+			zip = zi.nextLine();
 			query = "UPDATE users SET user_zip = '" + zip + "'WHERE user_pin = '" + pin + "'";
 			break;
 		case 10:
 			String phone = "";
 			Scanner ph = new Scanner(System.in);
 			System.out.println("Phone:");
-			city = ph.nextLine();
+			phone = ph.nextLine();
 			query = "UPDATE users SET user_phone = '" + phone + "'WHERE user_pin = '" + pin + "'";
 			break;
 		case 11:
