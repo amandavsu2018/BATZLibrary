@@ -10,47 +10,17 @@ import java.util.Scanner;
 
 public class CreateUser {
 	public Random random = new Random();
-
+	public SQL s = new SQL();
+	
+	//So.... this method checks to see if the username is in the database on login attempt
+	//If true, proceed
+	//If false, don't proceed, session closes
 	public Boolean checkUsername(String user, boolean bool) {
 		bool = true;
-		Database db = new Database();
-		String database = new String(db.getDatabase());
-		String databaseUser = new String(db.getDatabaseUser());
-		String databasePass = new String(db.getDatabasePassword());
-		ResultSet result = null;
-		try {
-			// Creates conn Object with database from first line of file,
-			// databaseUser from 2nd,
-			// and databasePass from 3rd
-			Connection conn = DriverManager.getConnection(database, databaseUser, databasePass);
-
-			// Here we set the MariaDB query variable which is the command we
-			// are going to use
-			// when we query the database in order to obtain information
-			String query = "SELECT * FROM users WHERE user_username = '" + user + "'";
-
-			// This is Java PreparedStatement, it creates the object
-			// preparedStatement which has the
-			// conn variable data and the database query variable. It will be
-			// executed in order
-			// to connect to the MariaDB database to get our information out
-			PreparedStatement preparedStmt = conn.prepareStatement(query);
-
-			// This ResultSet is an object that contains the executed query from
-			// preparedStatement.
-			// if result has stuff in it from the query (i.e. the username we
-			// are checking to see
-			// is already in the database) then result.first() will have stuff
-			// in it and we can
-			// set boolean to true. Else it's empty and we set boolean to false
-			result = preparedStmt.executeQuery(query);
-
-			// close database connection after query
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
+		
+		String query = "SELECT * FROM users WHERE user_username = '" + user + "'";
+		ResultSet result = s.SQLConnMain(query); 
+		
 		// check to see if ResultSet result has stuff in it. Return true if so,
 		// and false if not.
 		try {
@@ -72,45 +42,9 @@ public class CreateUser {
 		String[] stringarray = new String[2];
 		String temp = null;
 		while (replace == false) {
-			Database db = new Database();
-			String database = new String(db.getDatabase());
-			String databaseUser = new String(db.getDatabaseUser());
-			String databasePass = new String(db.getDatabasePassword());
-			ResultSet result = null;
-			try {
-				// Creates conn Object with database from first line of file,
-				// databaseUser from 2nd,
-				// and databasePass from 3rd
-				Connection conn = DriverManager.getConnection(database, databaseUser, databasePass);
-
-				// Here we set the MariaDB query variable which is the command
-				// we are going to use
-				// when we query the database in order to obtain information
-				String query = "SELECT * FROM users WHERE user_username = '" + user + "'";
-
-				// This is Java PreparedStatement, it creates the object
-				// preparedStatement which has the
-				// conn variable data and the database query variable. It will
-				// be executed in order
-				// to connect to the MariaDB database to get our information out
-				PreparedStatement preparedStmt = conn.prepareStatement(query);
-
-				// This ResultSet is an object that contains the executed query
-				// from preparedStatement.
-				// if result has stuff in it from the query (i.e. the username
-				// we are checking to see
-				// is already in the database) then result.first() will have
-				// stuff in it and we can
-				// set boolean to true. Else it's empty and we set boolean to
-				// false
-				result = preparedStmt.executeQuery(query);
-
-				// close database connection after query
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
+			String query = "SELECT * FROM users WHERE user_username = '" + user + "'";
+			ResultSet result = s.SQLConnMain(query);
+			
 			// check to see if ResultSet result has stuff in it. If it does,
 			// then the user name still exists in the database. So, increment
 			// num,
@@ -152,45 +86,10 @@ public class CreateUser {
 		
 		//create the pin here, run the checks below
 		pin = String.format("%04d", random.nextInt(9999));
-		Database db = new Database();
-		String database = new String(db.getDatabase());
-		String databaseUser = new String(db.getDatabaseUser());
-		String databasePass = new String(db.getDatabasePassword());
-		ResultSet result = null;
-		try {
-			// Creates conn Object with database from first line of file,
-			// databaseUser from 2nd,
-			// and databasePass from 3rd
-			Connection conn = DriverManager.getConnection(database, databaseUser, databasePass);
-
-			// Here we set the MariaDB query variable which is the command
-			// we are going to use
-			// when we query the database in order to obtain information
-			String query = "SELECT * FROM users WHERE user_pin = '" + pin + "'";
-
-			// This is Java PreparedStatement, it creates the object
-			// preparedStatement which has the
-			// conn variable data and the database query variable. It will
-			// be executed in order
-			// to connect to the MariaDB database to get our information out
-			PreparedStatement preparedStmt = conn.prepareStatement(query);
-
-			// This ResultSet is an object that contains the executed query
-			// from preparedStatement.
-			// if result has stuff in it from the query (i.e. the username
-			// we are checking to see
-			// is already in the database) then result.first() will have
-			// stuff in it and we can
-			// set boolean to true. Else it's empty and we set boolean to
-			// false
-			result = preparedStmt.executeQuery(query);
-
-			// close database connection after query
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
+		
+		String query = "SELECT * FROM users WHERE user_pin = '" + pin + "'";
+		ResultSet result = s.SQLConnMain(query);
+		
 		/* DEMONSTRATE HERE */
 		// checking if pin exists in ResultSet result
 		try {
