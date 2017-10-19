@@ -22,7 +22,8 @@ public class Manager {
 		System.out.println("1: Add User to Database.");
 		System.out.println("2: Create book listing.");
 		System.out.println("3: Edit User Account.");
-		System.out.println("4: Exit.");
+		System.out.println("4: Reactivate a User Account");
+		System.out.println("5: Exit.");
 		Scanner choicescan = new Scanner(System.in);
 		// get the choice
 		while (true) {
@@ -37,6 +38,8 @@ public class Manager {
 				} else if (choice == 3) {
 					break;
 				} else if (choice == 4) {
+					break;
+				} else if (choice == 5) {
 					break;
 				}
 			} catch (NumberFormatException nfe) {
@@ -55,10 +58,45 @@ public class Manager {
 		case 3:
 			editUser();
 		case 4:
+			reactivateUser();
+		case 5:
 			break;
 		}	
 		choicescan.close();
-		sessionOpen = false;
+		//sessionOpen = false;
+		System.out.println("Exiting.. Goodbye!");
+		System.exit(1);
+	}
+	
+	public void reactivateUser(){
+		System.out.println("Please enter the pin number of the user that you would like to reactivate: ");
+		Scanner scan = new Scanner(System.in);
+		String promptChoice;
+		while(true){
+			boolean checkIfPinExists = false;
+			String pinnumber = scan.nextLine();
+			String query = "SELECT * FROM users WHERE user_pin = '" + pinnumber + "'";
+			ReactivateUser reactivate = new ReactivateUser();
+			reactivate.setPin(pinnumber);
+			checkIfPinExists = reactivate.checkIfPinExistsInDB(query);
+			if(checkIfPinExists == true){
+				reactivate.updateLockedStatusInDB();
+				System.out.println("User unlocked successfully.");
+				break;
+			} else {
+				System.out.println("The pin number entered does not exists in the database.");
+				reactivateUser();
+			}
+		}
+		System.out.println("What would you like to do? 1. Go back to main prompt, 2. Exit");
+		promptChoice = scan.nextLine();
+		if(promptChoice.equals("1")){
+			actionsMa();
+		} else {
+			scan.close();
+			System.out.println("Exiting.. Goodbye!");
+			System.exit(1);
+		}
 	}
 	
 	public void editUser(){
@@ -204,13 +242,14 @@ public class Manager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("What would you like to do? 1. Edit more fields 2. Exit");
+		System.out.println("What would you like to do? 1. Go back to main prompt, 2. Exit");
 		Scanner scan = new Scanner(System.in);
 		int thescan = scan.nextInt();
 		if(thescan == 1){
-			editUser();
+			actionsMa();
 		} else {
-			sessionOpen = false;
+			System.out.println("Exiting.. Goodbye!");
+			System.exit(1);
 		}
 	}
 
