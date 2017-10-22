@@ -7,10 +7,76 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Scanner;
 
 public class Login {
 	Database db = new Database();
 
+    String username, password, status = "", fname = "";
+    boolean sessionOpen = false;
+    boolean checkBool = false; 
+	
+	public void logIn() {
+    //Start Login 
+    System.out.println("Login.\n");
+    Scanner scan = new Scanner(System.in);
+    System.out.print("Username: ");
+    username = scan.nextLine();
+    
+    //Check to see if user exists
+    Login lg = new Login();
+    boolean userlogin = lg.checkUsername(username, checkBool);
+    
+    if(userlogin == true){
+    	System.out.println("User exists\n");
+    	System.out.println("Password: ");
+    	password = scan.nextLine();
+    	checkBool = false;
+    	userlogin = lg.checkUserPassword(username, password, checkBool);
+    	if(userlogin == true){
+    		System.out.println("Username and password match, LOGIN!");
+    		sessionOpen = true;
+    	} else {
+    		System.out.println("Username and password DO NOT match, Goodbye!");
+    	}
+    } else {
+    	System.out.println("User does not exist!");
+    }
+    
+    //set variable values from getters after login successful.
+    fname = lg.getFirstname(username, fname);
+    status = lg.getStatus(username, status);
+    
+    System.out.println(fname + "'s status is a " + status + ".");
+    
+    //use while loop with sessionOpen and timestamp to determine if Login hasn't timed-out
+    while(sessionOpen == true){
+    	System.out.println("Welcome " + fname + ". What would you like to do?");
+    	
+    	//stuff to do in here
+    	// ***** IF STATUS EQUALS MEMBER
+    	if(status.equals("member")){
+    		Member me = new Member();
+    		me.actionsMe();
+    		// ***** IF STATUS EQUALS ASSOCIATE *****
+    	} else if(status.equals("associate")){
+    		Associate a = new Associate();
+    		a.actionsA();
+    		// ***** IF STATUS EQUALS MANAGER *****
+    	} else if(status.equals("manager")){
+    		Manager ma = new Manager();
+    		ma.actionsMa();
+    		// ***** STATUS PENDING *****
+    	} else {
+    		System.out.println("Your membership status is still pending. Please contact an associate.");
+    	}
+    	
+    	//close the session
+    	sessionOpen = false;
+    }
+    System.out.println("Session closing. Goodbye!");
+}
+	
 	public Boolean checkUsername(String user, boolean bool) {
 		bool = true;
 		Database db = new Database();
