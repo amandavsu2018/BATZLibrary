@@ -60,7 +60,7 @@ public class SQL {
 			for(int i = 0; i < stringArray.length; i++){
 				statement.setString(i+1, stringArray[i]);
 			}
-			statement.executeQuery(query);
+			statement.execute();
 			conn.close();
 			
 		} catch (SQLException e) {

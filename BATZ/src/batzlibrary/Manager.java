@@ -256,49 +256,26 @@ public class Manager {
 	public void createBook(){
 		//variables
 		String bookTitle = null, bookAuthors = "", bookISBN = "", bookPubYear = "", bookKeywords = "", bookInvNum = "";
-		Database db = new Database();
-		String database = new String(db.getDatabase());
-		String databaseUser = new String(db.getDatabaseUser());
-		String databasePass = new String(db.getDatabasePassword());
-		
+		CreateBook cb = new CreateBook();
+
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.println("Enter book title.");
 		bookTitle = scan.nextLine().trim();
+		cb.setBookTitle(bookTitle);
 		if (bookTitle != null) {
 			System.out.println("Enter book authors seperated by commas.");
-			bookAuthors = scan.nextLine().trim();
+			cb.setBookAuthors(scan.nextLine().trim());
 			System.out.println("Enter book ISBN number.");
-			bookISBN = scan.nextLine().trim();
+			cb.setISBN(scan.nextLine().trim());
 			System.out.println("Enter book publication year.");
-			bookPubYear = scan.nextLine().trim();
+			cb.setBookPubYear(scan.nextLine().trim());
 			System.out.println("Enter book keywords seperated by commas.");
-			bookKeywords = scan.nextLine().trim();
+			cb.setBookKeywords(scan.nextLine().trim());
 			System.out.println("Enter number of books in inventory.");
-			bookInvNum = scan.nextLine().trim();
+			cb.setBookInventoryNumber(scan.nextLine().trim());
 		
-			try {
-				Connection conn = DriverManager.getConnection(database, databaseUser, databasePass);
-				System.out.println("Connection Object Created.\n");
-
-				String query = "INSERT INTO books (book_title, book_authors, book_ISBN, book_pubyear, book_keywords, book_invnum)"
-					+ "VALUES (?, ?, ?, ?, ?, ?);";
-				PreparedStatement preparedStmt = conn.prepareStatement(query);
-
-				preparedStmt.setString(1, bookTitle);
-				preparedStmt.setString(2, bookAuthors);
-				preparedStmt.setString(3, bookISBN);
-				preparedStmt.setString(4, bookPubYear);
-				preparedStmt.setString(5, bookKeywords);
-				preparedStmt.setString(6, bookInvNum);
-
-				System.out.println("Attempting database connection..\n");
-				preparedStmt.execute();
-				conn.close();
-				System.out.println("Updated database successfully.");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			cb.createNewBook();
 		}
 	}
 }
