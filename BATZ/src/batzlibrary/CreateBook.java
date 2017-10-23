@@ -33,6 +33,8 @@ public class CreateBook {
 	
 	public boolean createNewBook(){
 		String[] stringArray = {bookTitle, bookAuthors, bookISBN, bookPubYear, bookKeywords, bookInvNum};
+		CreateCheckedBook cb = new CreateCheckedBook();
+		cb.checkBookExisting(bookISBN, bookTitle, bookInvNum);
 		String query = "INSERT INTO books (book_title, book_authors, book_ISBN, book_pubyear, book_keywords, book_invnum)"
 					+ " VALUES (?, ?, ?, ?, ?, ?);";
 		s.SQLConnForMoreThanOnePreparedStatement(query, stringArray);
