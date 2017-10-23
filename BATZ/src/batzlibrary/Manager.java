@@ -55,14 +55,26 @@ public class Manager {
 			break;
 		case 2:
 			createBook();
+			System.out.println("What would you like to do next? 1. Main Menu, 2. Create another book");
+			String x = choicescan.nextLine();
+			if(x.equals("1")) {
+				actionsMa();
+			}
+			else if(x.equals("2")) {
+				createBook();
+			}
+			else {
+				break;
+			}
 		case 3:
 			editUser();
+			break;
 		case 4:
 			reactivateUser();
+			break;
 		case 5:
 			break;
 		}	
-		choicescan.close();
 		//sessionOpen = false;
 		System.out.println("Exiting.. Goodbye!");
 		System.exit(1);
