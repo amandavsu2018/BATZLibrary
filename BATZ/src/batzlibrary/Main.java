@@ -6,6 +6,7 @@ import java.io.*;
 
 public class Main {
 
+	static boolean sessionOpen = true;
 	// JDBC driver name and database URL
 	static String jdbc_driver = "";
 	static String database = "";
@@ -21,14 +22,16 @@ public class Main {
 		Database db = new Database();
 		database = db.dataBase();
 		
-		greet();
+		while(sessionOpen == true) {
+			greet();
+		}
 	}
 
 	public static void greet() {
     		String answ = "";
     		Scanner sc = new Scanner(System.in);
     		System.out.println("Hello! Welcome to BATZ Library. Would you like to do?");
-    		System.out.println("1. Log in, 2. Search");
+    		System.out.println("1. Log in, 2. Search, 3. Exit");
     		answ = sc.nextLine();
     		
     		if(answ.equals("1")) {
@@ -39,9 +42,13 @@ public class Main {
     			SearchBooks sb = new SearchBooks();
     			sb.KeywordInput();
     		}
+    		else if(answ.equals("3")) {
+    			sessionOpen = false;
+    			System.out.print("Goodbye!");
+    		}
     		else {
     			System.out.println("Invalid input.");
     			greet();
-    	}
+    		}
    }
 }

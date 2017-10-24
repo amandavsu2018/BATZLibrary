@@ -51,7 +51,7 @@ public class CreateCheckedBook {
 		invnumber = Integer.toString(inv);
 		checkBookExisting(isbn, bookTitle, ccbnumber);
 		bi.updateBookInventoryNumberViaISBN(isbn, inv);
-		scan.close();
+		//scan.close();
 		return true;
 	}
 }

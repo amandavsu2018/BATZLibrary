@@ -9,90 +9,95 @@ import java.util.Scanner;
 
 public class Manager {
 
-	boolean sessionOpen = true;
-	
-	//for passing to createUser() method
+	// for passing to createUser() method
 	String userstatus = "manager";
 
 	public Manager() {
 	}
 
 	public void actionsMa() {
-		int choice = 0;
-		System.out.println("What would you like to do?\n");
-		System.out.println("1: Add User to Database.");
-		System.out.println("2: Create book listing.");
-		System.out.println("3: Edit User Account.");
-		System.out.println("4: Reactivate a User Account");
-		System.out.println("5: Exit.");
-		Scanner choicescan = new Scanner(System.in);
-		// get the choice
-		while (true) {
-			//these need to be here in order to set choice variable
-			//to a number 1-4 and nothing else
-			try {
-				choice = Integer.parseInt(choicescan.nextLine());
-				if (choice == 1) {
-					break;
-				} else if (choice == 2) {
-					break;
-				} else if (choice == 3) {
-					break;
-				} else if (choice == 4) {
-					break;
-				} else if (choice == 5) {
-					break;
+		boolean sessionOpen = true;
+		while (sessionOpen == true) {
+			int choice = 0;
+			System.out.println("What would you like to do?\n");
+			System.out.println("1: Add User to Database.");
+			System.out.println("2: Create book listing.");
+			System.out.println("3: Edit User Account.");
+			System.out.println("4: Reactivate a User Account");
+			System.out.println("5: Exit.");
+			// get the choice
+			while (true) {
+				Scanner choicescan = new Scanner(System.in);
+				// these need to be here in order to set choice variable
+				// to a number 1-4 and nothing else
+				try {
+					choice = Integer.parseInt(choicescan.nextLine());
+					if (choice == 1) {
+						break;
+					} else if (choice == 2) {
+						break;
+					} else if (choice == 3) {
+						break;
+					} else if (choice == 4) {
+						break;
+					} else if (choice == 5) {
+						sessionOpen = false;
+						break;
+					} else {
+						sessionOpen = false;
+						break;
+					}
+				} catch (NumberFormatException nfe) {
+					System.out.print("Try again: ");
 				}
-			} catch (NumberFormatException nfe) {
-				System.out.print("Try again: ");
+//				choicescan.close();
 			}
-		}
 
-		// switch cases
-		switch (choice) {
-		case 1:
-			CreateUser cu = new CreateUser();
-			cu.createUser(userstatus);
-			break;
-		case 2:
-			createBook();
-			System.out.println("What would you like to do next? 1. Main Menu, 2. Create another book");
-			String x = choicescan.nextLine();
-			if(x.equals("1")) {
-				actionsMa();
-			}
-			else if(x.equals("2")) {
+			// switch cases
+			switch (choice) {
+			case 1:
+				CreateUser cu = new CreateUser();
+				cu.createUser(userstatus);
+				break;
+			case 2:
 				createBook();
-			}
-			else {
+				break;
+			/*
+			 * System.out.
+			 * println("What would you like to do next? 1. Main Menu, 2. Create another book"
+			 * ); String x = choicescan.nextLine(); if (x.equals("1")) { actionsMa(); } else
+			 * if (x.equals("2")) { createBook(); } else { break; }
+			 */ case 3:
+				editUser();
+				break;
+			case 4:
+				reactivateUser();
+				break;
+			// case 5:
+			// sessionOpen = false;
+			// break;
+			default:
+				sessionOpen = false;
 				break;
 			}
-		case 3:
-			editUser();
-			break;
-		case 4:
-			reactivateUser();
-			break;
-		case 5:
-			break;
-		}	
-		//sessionOpen = false;
-		System.out.println("Exiting.. Goodbye!");
-		System.exit(1);
+			// sessionOpen = false;
+			// System.out.println("Exiting.. Goodbye!");
+			// System.exit(1);
+		}
 	}
-	
-	public void reactivateUser(){
+
+	public void reactivateUser() {
 		System.out.println("Please enter the pin number of the user that you would like to reactivate: ");
 		Scanner scan = new Scanner(System.in);
 		String promptChoice;
-		while(true){
+		while (true) {
 			boolean checkIfPinExists = false;
 			String pinnumber = scan.nextLine();
 			String query = "SELECT * FROM users WHERE user_pin = '" + pinnumber + "'";
 			ReactivateUser reactivate = new ReactivateUser();
 			reactivate.setPin(pinnumber);
 			checkIfPinExists = reactivate.checkIfPinExistsInDB(query);
-			if(checkIfPinExists == true){
+			if (checkIfPinExists == true) {
 				reactivate.updateLockedStatusInDB();
 				System.out.println("User unlocked successfully.");
 				break;
@@ -101,31 +106,28 @@ public class Manager {
 				reactivateUser();
 			}
 		}
-		System.out.println("What would you like to do? 1. Go back to main prompt, 2. Exit");
-		promptChoice = scan.nextLine();
-		if(promptChoice.equals("1")){
-			actionsMa();
-		} else {
-			scan.close();
-			System.out.println("Exiting.. Goodbye!");
-			System.exit(1);
-		}
-	}
-	
-	public void editUser(){
+		/*
+		 * System.out.
+		 * println("What would you like to do? 1. Go back to main prompt, 2. Exit");
+		 * promptChoice = scan.nextLine(); if (promptChoice.equals("1")) { actionsMa();
+		 * } else { scan.close(); System.out.println("Exiting.. Goodbye!");
+		 * System.exit(1); }
+		 */}
+
+	public void editUser() {
 		int choice = 0;
 		Database db = new Database();
 		String database = new String(db.getDatabase());
 		String databaseUser = new String(db.getDatabaseUser());
 		String databasePass = new String(db.getDatabasePassword());
 		String query = "";
-		
+
 		Scanner pinscan = new Scanner(System.in);
 		System.out.println("Please enter user's pin number.");
 		String pin = pinscan.next();
-		
-		//We need to add a checkPin() method later to check for existing pin
-		
+
+		// We need to add a checkPin() method later to check for existing pin
+
 		System.out.println("What would you like to edit?\n");
 		System.out.println("1: Generate New Password.");
 		System.out.println("2: Set Locked to true or false.");
@@ -140,8 +142,8 @@ public class Manager {
 		System.out.println("11: Exit.");
 		Scanner choicescan = new Scanner(System.in);
 		while (true) {
-			//these need to be here in order to set choice variable
-			//to a number 1-4 and nothing else
+			// these need to be here in order to set choice variable
+			// to a number 1-4 and nothing else
 			try {
 				choice = Integer.parseInt(choicescan.nextLine());
 				if (choice == 1) {
@@ -175,7 +177,7 @@ public class Manager {
 		// switch cases
 		switch (choice) {
 		case 1:
-			//generate password
+			// generate password
 			String password = "";
 			CreateUser thing = new CreateUser();
 			password = thing.createPassword();
@@ -248,39 +250,37 @@ public class Manager {
 		case 11:
 			break;
 		}
-		try{
+		try {
 			Connection conn = DriverManager.getConnection(database, databaseUser, databasePass);
 			PreparedStatement preparedStmt = conn.prepareStatement(query);
 			preparedStmt.executeQuery(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("What would you like to do? 1. Go back to main prompt, 2. Exit");
-		Scanner scan = new Scanner(System.in);
-		int thescan = scan.nextInt();
-		if(thescan == 1){
-			actionsMa();
-		} else {
-			System.out.println("Exiting.. Goodbye!");
-			System.exit(1);
-		}
-	}
+		/*
+		 * System.out.
+		 * println("What would you like to do? 1. Go back to main prompt, 2. Exit");
+		 * Scanner scan = new Scanner(System.in); int thescan = scan.nextInt(); if
+		 * (thescan == 1) { actionsMa(); } else {
+		 * System.out.println("Exiting.. Goodbye!"); System.exit(1); }
+		 */ }
 
-	public void createBook(){
-		//variables
+	public void createBook() {
+		// variables
 		boolean evaluate = false;
-		String[] variables = new String[]{"Title: ", "Authors: ", "ISBN: ", "Publication Year: ", "Keywords: ", "Inventory Available: "};
+		String[] variables = new String[] { "Title: ", "Authors: ", "ISBN: ", "Publication Year: ", "Keywords: ",
+				"Inventory Available: " };
 		String bookTitle = "", bookAuthors = "", bookISBN = null, bookPubYear = "", bookKeywords = "", bookInvNum = "";
 		CreateBook cb = new CreateBook();
 		CheckBookExists cbe = new CheckBookExists();
 
 		Scanner scan = new Scanner(System.in);
-		
+
 		System.out.println("Enter book ISBN number: ");
 		bookISBN = scan.nextLine().trim();
-		if((bookISBN != null) && ((bookISBN.length() == 10) || (bookISBN.length() == 13))){
+		if ((bookISBN != null) && ((bookISBN.length() == 10) || (bookISBN.length() == 13))) {
 			evaluate = cbe.checkIfISBNExists(bookISBN);
-			if(evaluate == false){
+			if (evaluate == false) {
 				cb.setISBN(bookISBN);
 				System.out.println("Enter book title.");
 				bookTitle = scan.nextLine().trim();
@@ -295,16 +295,16 @@ public class Manager {
 				cb.setBookKeywords(scan.nextLine().trim());
 				System.out.println("Enter number of books in inventory.");
 				cb.setBookInventoryNumber(scan.nextLine().trim());
-				
+
 				cb.createNewBook();
-			} else{
+			} else {
 				System.out.println("Book Exists in the database!\n");
 				ResultSet result = cbe.returnExistingBook(bookISBN);
 				String book = "";
 				try {
-					 while(result.next()) {
+					while (result.next()) {
 						for (int i = 0; i < 6; i++) {
-							book = result.getString(i+2);
+							book = result.getString(i + 2);
 							System.out.print(variables[i]);
 							System.out.println(book);
 						}
@@ -313,27 +313,29 @@ public class Manager {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+
 				System.out.println("");
-				System.out.println("Would you like to: 1. Add to inventory, 2. Go back to main screen, 3. Exit?");
+				System.out.println("Would you like to: 1. Add to inventory, 2. Exit?");
 				String scanned = scan.nextLine();
-				if(scanned.equals("1")){
+				if (scanned.equals("1")) {
 					CreateCheckedBook ccb = new CreateCheckedBook();
 					ccb.checkBookUpdateWithoutCreatingNewBook(bookISBN);
-				} else if (scanned.equals("2")){
-						actionsMa();
-				} else if (scanned.equals("3")){
-					System.out.println("Exiting.. Goodbye!");
-					System.exit(1);
-				} else {
-					System.out.println("Invlaid choice. Defaulting to main screen.");
+				} else if (scanned.equals("2")) {
 					actionsMa();
 				}
+				else {
+				}
+				// else if (scanned.equals("3")) {
+				// System.out.println("Exiting.. Goodbye!");
+				// System.exit(1);
+				// } else {
+				// System.out.println("Invlaid choice. Defaulting to main screen.");
+				// actionsMa(); } } }
+				// System.out.println("Exiting.. Goodbye!");
 			}
 		} else {
 			System.out.println("You need to enter an ISBN that is either 10 numbers or 13 numbers");
 			createBook();
 		}
-		System.out.println("Exiting.. Goodbye!");
-		System.exit(1);
 	}
 }
