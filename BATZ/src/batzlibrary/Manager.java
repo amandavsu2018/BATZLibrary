@@ -3,6 +3,7 @@ package batzlibrary;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -267,27 +268,72 @@ public class Manager {
 
 	public void createBook(){
 		//variables
-		String bookTitle = null, bookAuthors = "", bookISBN = "", bookPubYear = "", bookKeywords = "", bookInvNum = "";
+		boolean evaluate = false;
+		String[] variables = new String[]{"Title: ", "Authors: ", "ISBN: ", "Publication Year: ", "Keywords: ", "Inventory Available: "};
+		String bookTitle = "", bookAuthors = "", bookISBN = null, bookPubYear = "", bookKeywords = "", bookInvNum = "";
 		CreateBook cb = new CreateBook();
+		CheckBookExists cbe = new CheckBookExists();
 
 		Scanner scan = new Scanner(System.in);
 		
-		System.out.println("Enter book title.");
-		bookTitle = scan.nextLine().trim();
-		cb.setBookTitle(bookTitle);
-		if (bookTitle != null) {
-			System.out.println("Enter book authors seperated by commas.");
-			cb.setBookAuthors(scan.nextLine().trim());
-			System.out.println("Enter book ISBN number.");
-			cb.setISBN(scan.nextLine().trim());
-			System.out.println("Enter book publication year.");
-			cb.setBookPubYear(scan.nextLine().trim());
-			System.out.println("Enter book keywords seperated by commas.");
-			cb.setBookKeywords(scan.nextLine().trim());
-			System.out.println("Enter number of books in inventory.");
-			cb.setBookInventoryNumber(scan.nextLine().trim());
-		
-			cb.createNewBook();
+		System.out.println("Enter book ISBN number: ");
+		bookISBN = scan.nextLine().trim();
+		if((bookISBN != null) && ((bookISBN.length() == 10) || (bookISBN.length() == 13))){
+			evaluate = cbe.checkIfISBNExists(bookISBN);
+			if(evaluate == false){
+				cb.setISBN(bookISBN);
+				System.out.println("Enter book title.");
+				bookTitle = scan.nextLine().trim();
+				cb.setBookTitle(bookTitle);
+				System.out.println("Enter book authors seperated by commas.");
+				cb.setBookAuthors(scan.nextLine().trim());
+				System.out.println("Enter book ISBN number.");
+				cb.setISBN(scan.nextLine().trim());
+				System.out.println("Enter book publication year.");
+				cb.setBookPubYear(scan.nextLine().trim());
+				System.out.println("Enter book keywords seperated by commas.");
+				cb.setBookKeywords(scan.nextLine().trim());
+				System.out.println("Enter number of books in inventory.");
+				cb.setBookInventoryNumber(scan.nextLine().trim());
+				
+				cb.createNewBook();
+			} else{
+				System.out.println("Book Exists in the database!\n");
+				ResultSet result = cbe.returnExistingBook(bookISBN);
+				String book = "";
+				try {
+					 while(result.next()) {
+						for (int i = 0; i < 6; i++) {
+							book = result.getString(i+2);
+							System.out.print(variables[i]);
+							System.out.println(book);
+						}
+						System.out.println("");
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				System.out.println("");
+				System.out.println("Would you like to: 1. Add to inventory, 2. Go back to main screen, 3. Exit?");
+				String scanned = scan.nextLine();
+				if(scanned.equals("1")){
+					CreateCheckedBook ccb = new CreateCheckedBook();
+					ccb.checkBookUpdateWithoutCreatingNewBook(bookISBN);
+				} else if (scanned.equals("2")){
+						actionsMa();
+				} else if (scanned.equals("3")){
+					System.out.println("Exiting.. Goodbye!");
+					System.exit(1);
+				} else {
+					System.out.println("Invlaid choice. Defaulting to main screen.");
+					actionsMa();
+				}
+			}
+		} else {
+			System.out.println("You need to enter an ISBN that is either 10 numbers or 13 numbers");
+			createBook();
 		}
+		System.out.println("Exiting.. Goodbye!");
+		System.exit(1);
 	}
 }

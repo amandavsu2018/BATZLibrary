@@ -11,7 +11,9 @@ public class BookInventory {
 		String query = "SELECT book_invnum FROM books WHERE book_ISBN = '" + isbn + "'";
 		ResultSet result = s.SQLConnMain(query);
 		try{
-			inventoryNumber = result.getString(1);
+			while(result.next()){
+				inventoryNumber = result.getString(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -22,15 +24,17 @@ public class BookInventory {
 		String query = "SELECT book_invnum FROM books WHERE book_title = '" + title + "'";
 		ResultSet result = s.SQLConnMain(query);
 		try{
-			inventoryNumber = result.getString(1);
+			while(result.next()){
+				inventoryNumber = result.getString(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return inventoryNumber;
 	}
 	
-	public boolean updateBookInventoryNumberViaISBN(String isbn){
-		String query = "UPDATE books SET book_invnum = '" + inventoryNumber + "'WHERE book_ISBN = '" + isbn + "'";
+	public boolean updateBookInventoryNumberViaISBN(String isbn, int number){
+		String query = "UPDATE books SET book_invnum = '" + number + "'WHERE book_ISBN = '" + isbn + "'";
 		s.SQLConnForUpdatingSingleRecord(query);
 		return true;
 	}

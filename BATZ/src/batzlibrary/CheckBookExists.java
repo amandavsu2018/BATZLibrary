@@ -37,4 +37,16 @@ public class CheckBookExists {
 		}
 		return checkIfTitleExists;
 	}
+	
+	public ResultSet returnExistingBook(String isbn){
+		String query = "SELECT * FROM books WHERE book_ISBN = '" + isbn + "'";
+		ResultSet result = s.SQLConnMain(query);
+		return result;
+	}
+	
+	public ResultSet returnExistingTitle(String isbn){
+		String query = "SELECT book_title FROM books WHERE book_ISBN = '" + isbn + "'";
+		ResultSet result = s.SQLConnMain(query);
+		return result;
+	}
 }
