@@ -1,8 +1,17 @@
 package batzlibrary;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
+
 public class CreateCheckedBook {
 
 	SQL s = new SQL();
+	String bookTitle = "";
+	
+	public void setBookTitle(String title){
+		this.bookTitle = title;
+	}
 	
 	public void checkBookExisting(String bookISBN, String bookTitle, String bookInvNum) {
 		String dateCheckedOut = null;
@@ -19,5 +28,30 @@ public class CreateCheckedBook {
 		for(int i = 0; i < bookInv; i++) {
 			s.SQLConnForMoreThanOnePreparedStatement(query, stringarray);
 		}
+	}
+	
+	public boolean checkBookUpdateWithoutCreatingNewBook(String isbn){
+		CheckBookExists cbe = new CheckBookExists();
+		Scanner scan = new Scanner(System.in);
+		BookInventory bi = new BookInventory();
+		String invnumber = bi.checkInventoryNumberViaISBN(isbn);
+		String ccbnumber = "";
+		ResultSet title = cbe.returnExistingTitle(isbn);
+		try{
+			while(title.next()){
+				bookTitle = title.getString(1);
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		System.out.println("How many would you like to add to inventory?");
+		int inv = scan.nextInt();
+		ccbnumber = Integer.toString(inv);
+		inv = inv + Integer.parseInt(invnumber);
+		invnumber = Integer.toString(inv);
+		checkBookExisting(isbn, bookTitle, ccbnumber);
+		bi.updateBookInventoryNumberViaISBN(isbn, inv);
+		scan.close();
+		return true;
 	}
 }

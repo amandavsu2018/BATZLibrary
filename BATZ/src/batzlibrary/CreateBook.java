@@ -6,6 +6,7 @@ import java.sql.SQLException;
 public class CreateBook {
 	String bookTitle = "", bookAuthors = "", bookISBN = "", bookPubYear = "", bookKeywords = "", bookInvNum = "";
 	SQL s = new SQL();
+	boolean checkIfISBNExists = false;
 	
 	public void setBookTitle(String title){
 		this.bookTitle = title;
