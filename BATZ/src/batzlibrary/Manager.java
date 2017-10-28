@@ -23,8 +23,9 @@ public class Manager {
 			System.out.println("1: Add User to Database.");
 			System.out.println("2: Create book listing.");
 			System.out.println("3: Edit User Account.");
-			System.out.println("4: Reactivate a User Account");
-			System.out.println("5: Exit.");
+			System.out.println("4: Edit Book.");
+			System.out.println("5: Reactivate a User Account");
+			System.out.println("6: Exit.");
 			// get the choice
 			while (true) {
 				Scanner choicescan = new Scanner(System.in);
@@ -41,6 +42,8 @@ public class Manager {
 					} else if (choice == 4) {
 						break;
 					} else if (choice == 5) {
+						break;
+					} else if (choice == 6) {
 						sessionOpen = false;
 						break;
 					} else {
@@ -50,7 +53,7 @@ public class Manager {
 				} catch (NumberFormatException nfe) {
 					System.out.print("Try again: ");
 				}
-//				choicescan.close();
+				// choicescan.close();
 			}
 
 			// switch cases
@@ -67,10 +70,14 @@ public class Manager {
 			 * println("What would you like to do next? 1. Main Menu, 2. Create another book"
 			 * ); String x = choicescan.nextLine(); if (x.equals("1")) { actionsMa(); } else
 			 * if (x.equals("2")) { createBook(); } else { break; }
-			 */ case 3:
+			 */
+			case 3:
 				editUser();
 				break;
 			case 4:
+				editBook();
+				break;
+			case 5:
 				reactivateUser();
 				break;
 			// case 5:
@@ -257,13 +264,116 @@ public class Manager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		/*
-		 * System.out.
-		 * println("What would you like to do? 1. Go back to main prompt, 2. Exit");
-		 * Scanner scan = new Scanner(System.in); int thescan = scan.nextInt(); if
-		 * (thescan == 1) { actionsMa(); } else {
-		 * System.out.println("Exiting.. Goodbye!"); System.exit(1); }
-		 */ }
+	}
+
+	public void editBook() {
+		int choice = 0;
+		int run = 0;
+		String query1 = "";
+		String query2 = "";
+
+		Database db = new Database();
+		String database = new String(db.getDatabase());
+		String databaseUser = new String(db.getDatabaseUser());
+		String databasePass = new String(db.getDatabasePassword());
+
+		Scanner isbnnum = new Scanner(System.in);
+		System.out.println("Please enter the book's ISBN.");
+		String isb = isbnnum.next();
+
+		CheckBookExists check = new CheckBookExists();
+		if (check.checkIfISBNExists(isb)) {
+			System.out.println("What would you like to edit?\n");
+			System.out.println("1: Edit Title.");
+			System.out.println("2: Edit Author.");
+			System.out.println("3: Edit ISBN.");
+			System.out.println("4: Edit Publishing Year.");
+			System.out.println("5: Edit Keywords.(Enter keywords seperated by commas.");
+			System.out.println("6: Edit Inventory Number.(do not use)");
+			System.out.println("7: Exit.");
+			Scanner choicescan = new Scanner(System.in);
+			while (true) {
+				try {
+					choice = Integer.parseInt(choicescan.nextLine());
+					if (choice == 1) {
+						break;
+					} else if (choice == 2) {
+						break;
+					} else if (choice == 3) {
+						break;
+					} else if (choice == 4) {
+						break;
+					} else if (choice == 5) {
+						break;
+					} else if (choice == 6) {
+						break;
+					} else if (choice == 7) {
+						break;
+					}
+				} catch (NumberFormatException nfe) {
+					System.out.print("Try again: ");
+				}
+			}
+
+			Scanner scan = new Scanner(System.in);
+
+			// switch cases
+			switch (choice) {
+			case 1:
+				System.out.println("Title: ");
+				String title = scan.nextLine();
+				query1 = "UPDATE books SET book_title = '" + title + "'WHERE book_ISBN = '" + isb + "'";
+				query2 = "UPDATE checkbooks SET checkbooks_title = '" + title + "'WHERE checkbooks_ISBN = '" + isb
+						+ "'";
+				run = 2;
+				break;
+			case 2:
+				System.out.println("Author: ");
+				String author = scan.nextLine();
+				query1 = "UPDATE books SET book_authors = '" + author + "'WHERE book_ISBN = '" + isb + "'";
+				run = 1;
+				break;
+			case 3:
+				System.out.println("ISBN: ");
+				String isbn = scan.nextLine();
+				query1 = "UPDATE books SET book_ISBN = '" + isbn + "'WHERE book_ISBN = '" + isb + "'";
+				query2 = "UPDATE checkbooks SET checkbooks_ISBN = '" + isbn + "'WHERE checkbooks_ISBN = '" + isb + "'";
+				run = 2;
+				break;
+			case 4:
+				System.out.println("Publishing Year: ");
+				String pubyear = scan.nextLine();
+				query1 = "UPDATE books SET book_pubyear = '" + pubyear + "'WHERE book_ISBN = '" + isb + "'";
+				run = 1;
+				break;
+			case 5:
+				System.out.println("KeyWords:(seperated by commas) ");
+				String keyword = scan.nextLine();
+				query1 = "UPDATE books SET book_keywords = '" + keyword + "'WHERE book_ISBN = '" + isb + "'";
+				run = 1;
+				break;
+			/*
+			 * Need to meet together to talk about how to do this!!!! case 6:
+			 * System.out.println("Inventory Number: "); String invnum = scan.nextLine();
+			 * query1 = "UPDATE books SET book_invnum = '" + invnum + "'WHERE book_ISBN = '"
+			 * + isb + "'"; break;
+			 */
+			default:
+				break;
+			}
+			// checks if there are 1 or 2 connections needed.
+			if (run == 1) {
+				SQL sql = new SQL();
+				sql.SQLConnForUpdatingSingleRecord(query1);
+			} else if (run == 2) {
+				SQL sql = new SQL();
+				sql.SQLConnForUpdatingSingleRecord(query1);
+				sql.SQLConnForUpdatingSingleRecord(query2);
+			}
+		} else {
+			System.out.println("That ISBN does not exist!");
+		}
+	}
 
 	public void createBook() {
 		// variables
@@ -322,8 +432,7 @@ public class Manager {
 					ccb.checkBookUpdateWithoutCreatingNewBook(bookISBN);
 				} else if (scanned.equals("2")) {
 					actionsMa();
-				}
-				else {
+				} else {
 				}
 				// else if (scanned.equals("3")) {
 				// System.out.println("Exiting.. Goodbye!");
