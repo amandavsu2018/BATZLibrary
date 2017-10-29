@@ -470,7 +470,8 @@ public class Manager {
 				cue.connect();
 				break;
 			} else {
-				reactivateUser();
+				System.out.println("Try Again. Please enter a valid pin");
+				scanPin();
 			}
 		}
 
