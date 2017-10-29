@@ -25,7 +25,8 @@ public class Manager {
 			System.out.println("3: Edit User Account.");
 			System.out.println("4: Edit Book.");
 			System.out.println("5: Reactivate a User Account");
-			System.out.println("6: Exit.");
+			System.out.println("6: Display User Info");
+			System.out.println("7: Exit.");
 			// get the choice
 			while (true) {
 				Scanner choicescan = new Scanner(System.in);
@@ -44,6 +45,8 @@ public class Manager {
 					} else if (choice == 5) {
 						break;
 					} else if (choice == 6) {
+						break;
+					} else if (choice == 7) {
 						sessionOpen = false;
 						break;
 					} else {
@@ -83,6 +86,9 @@ public class Manager {
 			// case 5:
 			// sessionOpen = false;
 			// break;
+			case 6:
+				scanPin();
+				break;
 			default:
 				sessionOpen = false;
 				break;
@@ -288,8 +294,8 @@ public class Manager {
 			System.out.println("2: Edit Author.");
 			System.out.println("3: Edit ISBN.");
 			System.out.println("4: Edit Publishing Year.");
-			System.out.println("5: Edit Keywords.(Enter keywords seperated by commas.");
-			System.out.println("6: Edit Inventory Number.(do not use)");
+			System.out.println("5: Edit Keywords. (Enter keywords seperated by commas.)");
+			System.out.println("6: Edit Inventory Number. (do not use)");
 			System.out.println("7: Exit.");
 			Scanner choicescan = new Scanner(System.in);
 			while (true) {
@@ -447,4 +453,27 @@ public class Manager {
 			createBook();
 		}
 	}
+	
+	public void scanPin() {
+		String pin = "";
+		Scanner scanp = new Scanner(System.in);
+		
+		System.out.println("Enter user's pin: " );
+		pin = scanp.nextLine();
+		while (true) {
+			boolean pinExists = false;
+			String query = "SELECT * FROM users WHERE user_pin = '" + pin + "'";
+			CheckUserExists cue = new CheckUserExists();
+			cue.setPin(pin);
+			pinExists = cue.checkIfPinExistsInDB(query);
+			if (pinExists == true) {
+				cue.connect();
+				break;
+			} else {
+				reactivateUser();
+			}
+		}
+
+	}
+
 }
