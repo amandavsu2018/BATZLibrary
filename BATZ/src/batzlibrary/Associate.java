@@ -16,7 +16,8 @@ public class Associate /* extends Member */ {
 			int choice = 0;
 			System.out.println("What would you like to do?");
 			System.out.println("1: Add User to Database.");
-			System.out.println("2: Exit.");
+			System.out.println("2: Display User Info. ");
+			System.out.println("3: Exit.");
 			Scanner choicescan = new Scanner(System.in);
 			// get the choice
 			while (true) {
@@ -25,6 +26,8 @@ public class Associate /* extends Member */ {
 					if (choice == 1) {
 						break;
 					} else if (choice == 2) {
+						break;
+					} else if (choice == 3) {
 						sessionOpen = false;
 						break;
 					} else {
@@ -42,6 +45,9 @@ public class Associate /* extends Member */ {
 				CreateUser cu = new CreateUser();
 				cu.createUser(userstatus);
 				break;
+			case 2:
+				scanPin();
+				break;
 			default:
 				sessionOpen = false;
 				break;
@@ -50,5 +56,28 @@ public class Associate /* extends Member */ {
 			}
 			// sessionOpen = false;
 		}
+	}
+
+	public void scanPin() {
+		String pin = "";
+		Scanner scanp = new Scanner(System.in);
+		
+		System.out.println("Enter user's pin: " );
+		pin = scanp.nextLine();
+		while (true) {
+			boolean pinExists = false;
+			String query = "SELECT * FROM users WHERE user_pin = '" + pin + "'";
+			CheckUserExists cue = new CheckUserExists();
+			cue.setPin(pin);
+			pinExists = cue.checkIfPinExistsInDB(query);
+			if (pinExists == true) {
+				cue.connect();
+				break;
+			} else {
+				System.out.println("Invalid Pin. Try Again.");
+				scanPin();
+			}
+		}
+
 	}
 }
