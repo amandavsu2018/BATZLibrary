@@ -277,6 +277,7 @@ public class Manager {
 		int run = 0;
 		String query1 = "";
 		String query2 = "";
+		String query3 = "";
 
 		Database db = new Database();
 		String database = new String(db.getDatabase());
@@ -331,6 +332,7 @@ public class Manager {
 				query1 = "UPDATE books SET book_title = '" + title + "'WHERE book_ISBN = '" + isb + "'";
 				query2 = "UPDATE checkbooks SET checkbooks_title = '" + title + "'WHERE checkbooks_ISBN = '" + isb
 						+ "'";
+				query3 = "UPDATE bookqueue SET bookqueue_title = '" + title + "'WHERE bookqueue_ISBN = '" + isb + "'";
 				run = 2;
 				break;
 			case 2:
@@ -344,6 +346,7 @@ public class Manager {
 				String isbn = scan.nextLine();
 				query1 = "UPDATE books SET book_ISBN = '" + isbn + "'WHERE book_ISBN = '" + isb + "'";
 				query2 = "UPDATE checkbooks SET checkbooks_ISBN = '" + isbn + "'WHERE checkbooks_ISBN = '" + isb + "'";
+				query3 = "UPDATE bookqueue SET bookqueue_ISBN = '" + isbn + "'WHERE bookqueue_ISBN = '" + isb + "'";
 				run = 2;
 				break;
 			case 4:
@@ -375,6 +378,7 @@ public class Manager {
 				SQL sql = new SQL();
 				sql.SQLConnForUpdatingSingleRecord(query1);
 				sql.SQLConnForUpdatingSingleRecord(query2);
+				sql.SQLConnForUpdatingSingleRecord(query3);
 			}
 		} else {
 			System.out.println("That ISBN does not exist!");
@@ -453,12 +457,12 @@ public class Manager {
 			createBook();
 		}
 	}
-	
+
 	public void scanPin() {
 		String pin = "";
 		Scanner scanp = new Scanner(System.in);
-		
-		System.out.println("Enter user's pin: " );
+
+		System.out.println("Enter user's pin: ");
 		pin = scanp.nextLine();
 		while (true) {
 			boolean pinExists = false;
