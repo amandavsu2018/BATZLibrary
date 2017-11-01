@@ -8,7 +8,7 @@ public class UsersCheckedOutNumber {
 	
 	public String getAmountCheckedOut(String pin) {
 		String amount = null;
-		String query = "SELECT checkedoutnumber FROM users WHERE user_pin = '" + pin + "'";
+		String query = "SELECT user_checkedoutnumber FROM users WHERE user_pin = '" + pin + "'";
 		ResultSet result = s.SQLConnMain(query);
 		
 		try {
