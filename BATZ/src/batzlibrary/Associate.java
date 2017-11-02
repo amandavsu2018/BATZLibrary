@@ -1,5 +1,6 @@
 package batzlibrary;
 
+import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class Associate /* extends Member */ {
@@ -93,8 +94,14 @@ public class Associate /* extends Member */ {
 				isbn = scanp.nextLine();
 				bool = cbe.checkIfISBNExists(isbn);
 				if(bool == true) {
-					cob.checkOut();
+					ResultSet result = cbe.returnExistingBook(isbn);
+					
+				} else {
+					System.out.println("This book ISBN doesn not exist in the database.");
+					break;
 				}
+				
+				cob.checkOut();
 			default:
 				sessionOpen = false;
 				break;
