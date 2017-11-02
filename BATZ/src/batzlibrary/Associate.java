@@ -94,14 +94,18 @@ public class Associate /* extends Member */ {
 				isbn = scanp.nextLine();
 				bool = cbe.checkIfISBNExists(isbn);
 				if(bool == true) {
-					ResultSet result = cbe.returnExistingBook(isbn);
-					
+					bool = cob.checkCorrectBook(isbn);
 				} else {
-					System.out.println("This book ISBN doesn not exist in the database.");
+					System.out.println("This book ISBN does not exist in the database.");
 					break;
 				}
 				
-				cob.checkOut();
+				// user & author correct, proceed to checkout the book
+				if(bool == true){
+					cob.checkOut();
+				} else {
+					break;
+				}
 			default:
 				sessionOpen = false;
 				break;

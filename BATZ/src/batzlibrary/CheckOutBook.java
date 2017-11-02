@@ -322,7 +322,7 @@ public class CheckOutBook {
 		if(cuebool == true) {
 			cue.connect();
 		}
-		System.out.println("\nIs this the correct user? y/n: ");
+		System.out.println("\nIs this the correct user? (y/n)");
 		Scanner scanp = new Scanner(System.in);
 		while(true) {
 			choice = scanp.nextLine();
@@ -350,6 +350,43 @@ public class CheckOutBook {
 		}
 		
 		return cuebool;
+	}
+	
+	public boolean checkCorrectBook(String isbn){
+		boolean bool = false;
+		String[] bookinfo = {"Title: ", "Authors: ", "ISBN: ", "Publication Year: ", "Keywords: "};
+		String var = "";
+		CheckBookExists cbe = new CheckBookExists();
+		ResultSet result = cbe.returnExistingBook(isbn);
+		try{
+			while(result.next()){
+				for (int i = 1; i < 6; i++) {
+					var = result.getString(i+1);
+					System.out.print(bookinfo[i-1]);
+					System.out.println(var);
+				}
+				System.out.println("");
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		
+		System.out.println("\nIs this the correct book? (y/n)");
+		Scanner scanp = new Scanner(System.in);
+		while(true) {
+			choice = scanp.nextLine();
+			if(choice.equals("y") || choice.equals("Y") || choice.equals("yes")) {
+				bool = true;
+				break;
+			} else if(choice.equals("n") || choice.equals("N") || choice.equals("no")) {
+				bool = false;
+				break;
+			} else {
+				System.out.println("Please enter a 'y' or an 'n'");
+			}
+		}
+		
+		return bool;
 	}
 	
 	public void checkOut() {
