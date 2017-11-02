@@ -59,14 +59,15 @@ public class Associate /* extends Member */ {
 				scanPin();
 				break;
 			case 3:
+				CheckOutBook cob = new CheckOutBook();
 				System.out.println("Please enter the Member's library card number: ");
 				Scanner scanp = new Scanner(System.in);
 				pin = scanp.nextLine();
-				bool = checkUserExists(pin);
+				bool = cob.checkUserExists(pin);
 				
 				// if user exists, check if corrent user
 				if(bool == true) {
-					bool = checkCorrectUser(pin);
+					bool = cob.checkCorrectUser(pin);
 				} else {
 					System.out.println("That library card number does not exists in the database.\n");
 					break;
@@ -74,7 +75,7 @@ public class Associate /* extends Member */ {
 				
 				// if correct user, check if locked
 				if(bool == true) {
-					bool = checkUserLockedStatus(pin);
+					bool = cob.checkUserLockedStatus(pin);
 				} else {
 					break;
 				}
@@ -92,7 +93,7 @@ public class Associate /* extends Member */ {
 				isbn = scanp.nextLine();
 				bool = cbe.checkIfISBNExists(isbn);
 				if(bool == true) {
-					checkOut();
+					cob.checkOut();
 				}
 			default:
 				sessionOpen = false;
@@ -125,59 +126,5 @@ public class Associate /* extends Member */ {
 			}
 		}
 
-	}
-	
-	public boolean checkUserExists(String pinnum) {
-		boolean cuebool = false;
-		String query = "SELECT * FROM users WHERE user_pin = '" + pin + "'";
-		
-		//check to see if user exists
-		CheckUserExists cue = new CheckUserExists();
-		cue.setPin(pin);
-		cuebool = cue.checkIfPinExistsInDB(query);
-		return cuebool;
-	}
-	
-	public boolean checkCorrectUser(String pin) {
-		boolean cuebool = false;
-		String query = "SELECT * FROM users WHERE user_pin = '" + pin + "'";
-		CheckUserExists cue = new CheckUserExists();
-		cue.setPin(pin);
-		cuebool = cue.checkIfPinExistsInDB(query);
-		if(cuebool == true) {
-			cue.connect();
-		}
-		System.out.println("\nIs this the correct user? y/n: ");
-		Scanner scanp = new Scanner(System.in);
-		while(true) {
-			choice = scanp.nextLine();
-			if(choice.equals("y") || choice.equals("Y") || choice.equals("yes")) {
-				cuebool = true;
-				break;
-			} else if(choice.equals("n") || choice.equals("N") || choice.equals("no")) {
-				cuebool = false;
-				break;
-			} else {
-				System.out.println("Please enter a 'y' or an 'n'");
-			}
-		}
-		
-		return cuebool;
-	}
-	
-	public boolean checkUserLockedStatus(String pin) {
-		boolean cuebool = false;
-		String status = "";
-		UsersTableCheckout utc = new UsersTableCheckout();
-		status = utc.getUserLockedStatus(pin);
-		if(status.equals("true")) {
-			cuebool = true;
-		}
-		
-		return cuebool;
-	}
-	
-	public void checkOut() {
-		
 	}
 }

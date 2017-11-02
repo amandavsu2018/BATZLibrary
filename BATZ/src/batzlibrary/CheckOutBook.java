@@ -16,9 +16,10 @@ public class CheckOutBook {
 	String FullName = "";
 	String Pin = "";
 	String id = "";
+	String pin = "";
 	String isbn = "";
 	String title = "";
-	
+	String choice = "";
 	
 	//Gets member info fist and last name  + their pin	
 	public void GetMemInfo() {
@@ -300,4 +301,60 @@ public class CheckOutBook {
 	 * onHold()
 	 * }
 	 */
+
+	public boolean checkUserExists(String pinnum) {
+		boolean cuebool = false;
+		String query = "SELECT * FROM users WHERE user_pin = '" + pinnum + "'";
+		
+		//check to see if user exists
+		CheckUserExists cue = new CheckUserExists();
+		cue.setPin(pinnum);
+		cuebool = cue.checkIfPinExistsInDB(query);
+		return cuebool;
+	}
+	
+	public boolean checkCorrectUser(String pinnum) {
+		boolean cuebool = false;
+		String query = "SELECT * FROM users WHERE user_pin = '" + pinnum + "'";
+		CheckUserExists cue = new CheckUserExists();
+		cue.setPin(pinnum);
+		cuebool = cue.checkIfPinExistsInDB(query);
+		if(cuebool == true) {
+			cue.connect();
+		}
+		System.out.println("\nIs this the correct user? y/n: ");
+		Scanner scanp = new Scanner(System.in);
+		while(true) {
+			choice = scanp.nextLine();
+			if(choice.equals("y") || choice.equals("Y") || choice.equals("yes")) {
+				cuebool = true;
+				break;
+			} else if(choice.equals("n") || choice.equals("N") || choice.equals("no")) {
+				cuebool = false;
+				break;
+			} else {
+				System.out.println("Please enter a 'y' or an 'n'");
+			}
+		}
+		
+		return cuebool;
+	}
+	
+	public boolean checkUserLockedStatus(String pin) {
+		boolean cuebool = false;
+		String status = "";
+		UsersTableCheckout utc = new UsersTableCheckout();
+		status = utc.getUserLockedStatus(pin);
+		if(status.equals("true")) {
+			cuebool = true;
+		}
+		
+		return cuebool;
+	}
+	
+	public void checkOut() {
+		System.out.println("You have successfully entered the checkOut() method!");
+	}
 }
+
+
