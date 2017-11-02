@@ -8,6 +8,9 @@ public class Associate /* extends Member */ {
 	String userstatus = "associate";
 	
 	SQL s = new SQL();
+	boolean bool;
+	String choice = "";
+	String lockedStatus = "";
 	String pin = "";
 	String isbn = "";
 
@@ -56,7 +59,33 @@ public class Associate /* extends Member */ {
 				scanPin();
 				break;
 			case 3:
-				checkOut();
+				System.out.println("Please enter the Member's library card number: ");
+				Scanner scanp = new Scanner(System.in);
+				pin = scanp.nextLine();
+				bool = checkUserExists(pin);
+				
+				// if user exists, check if corrent user
+				if(bool == true) {
+					bool = checkCorrectUser(pin);
+				} else {
+					break;
+				}
+				
+				// if correct user, check if locked
+				if(bool == true) {
+					bool = checkUserLockedStatus(pin);
+				} else {
+					break;
+				}
+				
+				// if not locked, enter ISBN of book to checkout
+				CheckBookExists cbe = new CheckBookExists();
+				System.out.println("Please enter the ISBN of the book to checkout: ");
+				isbn = scanp.nextLine();
+				bool = cbe.checkIfISBNExists(isbn);
+				if(bool == true) {
+					checkOut();
+				}
 			default:
 				sessionOpen = false;
 				break;
@@ -90,24 +119,60 @@ public class Associate /* extends Member */ {
 
 	}
 	
-	public void checkOut() {
-		//String pin = "":
+	public boolean checkUserExists(String pinnum) {
 		boolean cuebool = false;
-		System.out.println("Please enter the Member's library card number: ");
-		Scanner scanp = new Scanner(System.in);
-		pin = scanp.nextLine();
+		String query = "SELECT * FROM users WHERE user_pin = '" + pin + "'";
 		
 		//check to see if user exists
 		CheckUserExists cue = new CheckUserExists();
 		cue.setPin(pin);
-		cuebool = cue.checkPinOnly();
-		
-		// if correct pin, check locked status
+		cuebool = cue.checkIfPinExistsInDB(query);
+		return cuebool;
+	}
+	
+	public boolean checkCorrectUser(String pin) {
+		boolean cuebool = false;
+		String query = "SELECT * FROM users WHERE user_pin = '" + pin + "'";
+		CheckUserExists cue = new CheckUserExists();
+		cue.setPin(pin);
+		cuebool = cue.checkIfPinExistsInDB(query);
 		if(cuebool == true) {
-			System.out.println("");
-		} else {
-			System.out.println("This library card number does not exist in the database. Please try again.");
-			checkOut();
+			cue.connect();
 		}
+		System.out.println("\nIs this the correct user? y/n: ");
+		Scanner scanp = new Scanner(System.in);
+		while(true) {
+			choice = scanp.nextLine();
+			if(choice.equals("y") || choice.equals("Y") || choice.equals("yes")) {
+				break;
+			} else if(choice.equals("n") || choice.equals("N") || choice.equals("no")) {
+				break;
+			} else {
+				System.out.println("Please enter a 'y' or an 'n'");
+			}
+		}
+		
+		if(choice.equals("y") || choice.equals("Y") || choice.equals("yes")) {
+			cuebool = true;
+		}
+		
+		scanp.close();
+		return cuebool;
+	}
+	
+	public boolean checkUserLockedStatus(String pin) {
+		boolean cuebool = false;
+		String status = "";
+		UsersTableCheckout utc = new UsersTableCheckout();
+		status = utc.getUserLockedStatus(pin);
+		if(status.equals("true")) {
+			cuebool = true;
+		}
+		
+		return cuebool;
+	}
+	
+	public void checkOut() {
+		
 	}
 }
