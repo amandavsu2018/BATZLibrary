@@ -68,6 +68,7 @@ public class Associate /* extends Member */ {
 				if(bool == true) {
 					bool = checkCorrectUser(pin);
 				} else {
+					System.out.println("That library card number does not exists in the database.\n");
 					break;
 				}
 				
@@ -79,6 +80,13 @@ public class Associate /* extends Member */ {
 				}
 				
 				// if not locked, enter ISBN of book to checkout
+				if(bool == true) {
+					System.out.println("\nThis user is locked and cannot check out books at this current time.");
+					System.out.println("Please contact a manager in order to resolve this issue.\n");
+					break;
+				}
+				
+				// check book ISBN number
 				CheckBookExists cbe = new CheckBookExists();
 				System.out.println("Please enter the ISBN of the book to checkout: ");
 				isbn = scanp.nextLine();
@@ -144,19 +152,16 @@ public class Associate /* extends Member */ {
 		while(true) {
 			choice = scanp.nextLine();
 			if(choice.equals("y") || choice.equals("Y") || choice.equals("yes")) {
+				cuebool = true;
 				break;
 			} else if(choice.equals("n") || choice.equals("N") || choice.equals("no")) {
+				cuebool = false;
 				break;
 			} else {
 				System.out.println("Please enter a 'y' or an 'n'");
 			}
 		}
 		
-		if(choice.equals("y") || choice.equals("Y") || choice.equals("yes")) {
-			cuebool = true;
-		}
-		
-		scanp.close();
 		return cuebool;
 	}
 	
