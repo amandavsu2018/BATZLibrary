@@ -18,11 +18,29 @@ public class CheckUserExists {
 		this.pin = pinnum;
 	}
 	
+	public boolean checkPinOnly() {
+		boolean bool = false;
+		String query = "SELECT * FROM users WHERE user_pin = '" + pin + "'";
+		ResultSet result = s.SQLConnMain(query);
+		
+		try {
+			if(result.first()) {
+				bool = true;
+			} else {
+				bool = false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return bool;
+	}
+	
 	public boolean checkIfPinExistsInDB(String query) {
 		boolean checkIfPinExists = false;
 		ResultSet result = s.SQLConnMain(query);
 		try {
-			if (result.first()) {
+			if (result.next()) {
 				checkIfPinExists = true;
 				setPin(pin);
 				getUserPassword(pin);
