@@ -48,7 +48,7 @@ public class SQL {
 	}
 
 
-	public ResultSet SQLConnForMoreThanOnePreparedStatement(String query, String[] stringArray) {
+	public boolean SQLConnForMoreThanOnePreparedStatement(String query, String[] stringArray) {
 		Database db = new Database();
 		String database = new String(db.getDatabase());
 		String databaseUser = new String(db.getDatabaseUser());
@@ -66,7 +66,7 @@ public class SQL {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return result;
+		return true;
 	}
 	
 	public void SQLConnForUpdatingSingleRecord(String query){

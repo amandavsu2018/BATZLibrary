@@ -14,6 +14,7 @@ public class Associate /* extends Member */ {
 	String lockedStatus = "";
 	String pin = "";
 	String isbn = "";
+	int numberOfCheckedOutBooks = 0;
 
 	public Associate() {
 	}
@@ -137,10 +138,20 @@ public class Associate /* extends Member */ {
 				break;
 			}
 
-			// user & author correct, proceed to checkout the book
+			// user & author correct, check number of books checked out for user
 			if (bool == true) {
-				cob.checkOut();
+				UsersTableCheckout utc = new UsersTableCheckout();
+				numberOfCheckedOutBooks = Integer.parseInt(utc.getAmountCheckedOut(pin));
 			} else {
+				break;
+			}
+			
+			// if numberOfCheckedOutBooks < 10, proceed
+			if(numberOfCheckedOutBooks < 10){
+				cob.checkOut(isbn, pin);
+				break;
+			} else {
+				System.out.println("You have 10 books checked out already. You are allowed a maximum of 10 books." );
 				break;
 			}
 		}
