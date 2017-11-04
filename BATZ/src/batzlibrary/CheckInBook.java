@@ -1,5 +1,7 @@
 package batzlibrary;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class CheckInBook {
@@ -7,13 +9,13 @@ public class CheckInBook {
 		SQL sql = new SQL();
 		String query = "";
 		String isbn = "";
-		String userpin ="";
+		String userpin = "";
 		int choice;
 		Scanner scan = new Scanner(System.in);
-		//Not sure another way to get user pin
+		// Not sure another way to get user pin
 		System.out.println("Please enter your pin... for security reasons...");
 		userpin = scan.next();
-		while(true) {
+		while (true) {
 			System.out.println("What is the ISBN number?");
 			isbn = scan.next();
 			query = "UPDATE checkbooks SET checkbooks_dropbox = 'true' WHERE checkbooks_pin = '" + userpin
@@ -29,23 +31,23 @@ public class CheckInBook {
 						break;
 					} else if (choice == 2) {
 						break;
-					} 
+					}
 				} catch (NumberFormatException nfe) {
 					System.out.print("Try again: ");
 				}
 			}
 			switch (choice) {
-			case 1: 
+			case 1:
 				break;
 			}
 		}
 	}
 
+	//Needs to check for late fees before updating
 	public void checkDropBox() {
-
+		SQL sql = new SQL();
+		String query = "UPDATE checkbooks SET checkbooks_datecheckedout = '', checkbooks_datetoreturn = '', checkbooks_pin = '', checkbooks_renewalcount = '0', checkbooks_dropbox = '' WHERE checkbooks_dropbox = 'true'";
+		sql.SQLConnForUpdatingSingleRecord(query);
 	}
 
-	public void updateReturnedBooks() {
-
-	}
 }
