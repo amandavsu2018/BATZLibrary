@@ -9,62 +9,24 @@ import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 public class CheckOutBook {
+	SQL s = new SQL();
+	int noOfDays = 14;
 	String id = "";
 	String pin = "";
 	String isbn = "";
 	String title = "";
 	String choice = "";
 	
-	//Checks to see if the book limit has not been met | if not then they can check out a book
-	public void MaxBooksCheckOut(){
-		SQL s = new SQL();
-		String count = "";
-		int max = 10;
-		int current = Integer.parseInt(count);
-		
-		//Grabbing the amount of books currently checked out
-		String BookNum = "SELECT user_checkedoutnumber FROM users WHERE user_pin = '" + pin + "'";
-		ResultSet result = s.SQLConnMain(BookNum);
-		
-		try {
-			//Needed to get the info because result stores the information like an array
-			while(result.next()) {
-			 count = result.getString(1);
-			}
-		} 
-		catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		
-		if(current < max || current != max) {
-			//write this method
-			//checkOutBook();
-		}
-		
-		else {
-			System.out.println("You have reached the maximum amount of books checked-out");
-		}
-		
-		
-		// return string saying ( The "bookname" has succesfully been checkout out by "memberName" and is due by "returnDate")
-		
-	}
-	
-	
 	//Returns the current date
-	public LocalDate Checkout() 
-	{
-		LocalDate checkDay = LocalDate.now();
-		return checkDay;
-		
+	public LocalDate getCurrentDate() {
+		LocalDate today = LocalDate.now();
+		return today;
 	}
 	
 	//Returns date 2 weeks from current
-	public LocalDate Return(LocalDate time) 
-	{
-		LocalDate returntime = time.plus(2, ChronoUnit.WEEKS);
-		return returntime;
+	public LocalDate getTwoWeeksDate(LocalDate today) {
+		LocalDate twoWeeksAdd = today.plus(2, ChronoUnit.WEEKS);
+		return twoWeeksAdd;
 	}
 	
 	public boolean checkUserExists(String pinnum) {
@@ -165,7 +127,8 @@ public class CheckOutBook {
 		try{
 			if(result.first() == true){
 				checkbooksid = result.getString(1);
-				/** NEED TO ADD CODE **/
+				checkOutBook(checkbooksid, pinnum);
+				System.out.println("Book Checked out successfully!\n");
 			} else {
 				System.out.println("This book's inventory is currently all checked out.\n");
 				System.out.println("Would you like to place a hold on this book? (y/n)");
@@ -189,22 +152,28 @@ public class CheckOutBook {
 		
 	}
 	
-//	public void checkOutBook() 
-//	{		
-		//make a SQL command call with isbn() in it and also grab the id of the book too.
-//		SQL s = new SQL();
-//		getISBN();
-		/*String book = getISBN();
-		//Split the return from isbn at the " " and set the info to strings
+	//Check out a book, update checkedbooks table, users table
+	public boolean checkOutBook(String checkbookid, String pinnum) {
+		CheckbooksTableMethods cbtm = new CheckbooksTableMethods();
+		UsersTableCheckout utc = new UsersTableCheckout();
+		int amount = 0;
+		String getAmount = "";
+		LocalDate today = getCurrentDate();
+		LocalDate twoWeeksDate = getTwoWeeksDate(today);
 		
-		String isbn= "";
-		String id = "";
-		String title = "";
+		//update checbooks table
+		cbtm.setCheckedOutDateOnBook(today, checkbookid);
+		cbtm.setReturnDateOnBook(twoWeeksDate, checkbookid);
+		cbtm.setPINNumberOnBook(pinnum, checkbookid);
 		
-		// or change isbn to void and set the isbn, id ,and title to public variables
-		*/
-/*		
-		//This updates the number of books checkout for the user
+		//update users table (amount of books checked out)
+		getAmount = utc.getAmountCheckedOut(pinnum);
+		amount = Integer.parseInt(getAmount);
+		amount++;
+		getAmount = Integer.toString(amount);
+		utc.setAmountCheckedOut(pinnum, getAmount);
+		
+/*		//This updates the number of books checkout for the user
 		String checkNum = "SELECT checkedoutnumber FROM users WHERE user_name = '" + MemberUserName + "'";
 		ResultSet result = s.SQLConnMain(checkNum);
 		String userMax = "";
@@ -235,12 +204,10 @@ public class CheckOutBook {
 		//Inserts a new row with this info ( might have to modify code after this -- how to change later when someone wants this book after-----)
 		String insert = "INSERT INTO checkbooks (checkbooks_id, checkbooks_ISBN, checkbooks_title, checkbooks_datecheckedout, checkbooks_datetoreturn, checkbooks_pin) VALUES( '" + isbn +", "+ id +", "+ title +"," + checkTime+"," + returnTime +","+ Pin + ")" ;
 		ResultSet rezlt1 = s.SQLConnMain(insert);
-		
-		System.out.println("The User " + FullName + " has successfully checked out" + title + " which is due on the "+ returnTime);
-		
-		//Return to menu here
-		
-	}*/
+*/		
+		//System.out.println("The User " + FullName + " has successfully checked out" + title + " which is due on the "+ returnTime);
+		return true;
+	}
 }
 
 
