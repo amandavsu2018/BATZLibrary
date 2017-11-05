@@ -27,7 +27,8 @@ public class Associate /* extends Member */ {
 			System.out.println("1: Add User to Database.");
 			System.out.println("2: Display User Info. ");
 			System.out.println("3: Checkout Book for Member");
-			System.out.println("4: Exit.");
+			System.out.println("4: Check In Books From Dropbox ");
+			System.out.println("5: Exit.");
 			Scanner choicescan = new Scanner(System.in);
 			// get the choice
 			while (true) {
@@ -40,6 +41,8 @@ public class Associate /* extends Member */ {
 					} else if (choice == 3) {
 						break;
 					} else if (choice == 4) {
+						break;
+					} else if (choice == 5) {
 						sessionOpen = false;
 						break;
 					} else {
@@ -62,6 +65,10 @@ public class Associate /* extends Member */ {
 				break;
 			case 3:
 				case3();
+				break;
+			case 4:
+				CheckInBook cib = new CheckInBook();
+				cib.checkDropBox();
 				break;
 			default:
 				sessionOpen = false;

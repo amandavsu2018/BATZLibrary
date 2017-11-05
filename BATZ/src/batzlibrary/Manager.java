@@ -26,7 +26,8 @@ public class Manager {
 			System.out.println("4: Edit Book.");
 			System.out.println("5: Reactivate a User Account");
 			System.out.println("6: Display User Info");
-			System.out.println("7: Exit.");
+			System.out.println("7: Check In Books From Dropbox ");
+			System.out.println("8: Exit.");
 			// get the choice
 			while (true) {
 				Scanner choicescan = new Scanner(System.in);
@@ -46,7 +47,9 @@ public class Manager {
 						break;
 					} else if (choice == 6) {
 						break;
-					} else if (choice == 7) {
+					}  else if (choice == 7) {
+						break;
+					} else if (choice == 8) {
 						sessionOpen = false;
 						break;
 					} else {
@@ -88,6 +91,10 @@ public class Manager {
 			// break;
 			case 6:
 				scanPin();
+				break;
+			case 7:
+				CheckInBook cib = new CheckInBook();
+				cib.checkDropBox();
 				break;
 			default:
 				sessionOpen = false;
@@ -407,8 +414,8 @@ public class Manager {
 				cb.setBookTitle(bookTitle);
 				System.out.println("Enter book authors seperated by commas.");
 				cb.setBookAuthors(scan.nextLine().trim());
-				System.out.println("Enter book ISBN number.");
-				cb.setISBN(scan.nextLine().trim());
+				//System.out.println("Enter book ISBN number.");
+				//cb.setISBN(scan.nextLine().trim());
 				System.out.println("Enter book publication year.");
 				cb.setBookPubYear(scan.nextLine().trim());
 				System.out.println("Enter book keywords seperated by commas.");

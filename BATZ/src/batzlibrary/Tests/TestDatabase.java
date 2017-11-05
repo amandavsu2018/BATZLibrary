@@ -1,4 +1,4 @@
-package batzlibrary.Tests;
+/*package batzlibrary.Tests;
 
 import static org.junit.Assert.*;
 
@@ -29,4 +29,4 @@ public class TestDatabase {
 		// non-failure case
 		// assertEquals(testcase2, database);
 	}
-}
+}*/
