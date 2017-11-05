@@ -179,7 +179,7 @@ public class CreateUser {
 		String createuser = null;
 		String createpass = "", createpin = "", createlocked = "", createstatus = null;
 		String createfname = "", createlname = "", createstreet = "", createcity = "", createstate = "";
-		String createzip = "", createphone = "", createemail = "";
+		String createzip = "", createphone = "", createcheckedoutnumber = "0";
 		
 		boolean checkBool = false;
 
@@ -224,8 +224,8 @@ public class CreateUser {
 						"batzlibrary", "XvKk1hl36JLqYLKC");
 				System.out.println("Connection Object Created.\n");
 
-				String query = "INSERT INTO users (user_username, user_password, user_pin, user_locked, user_status, user_firstname, user_lastname, user_street, user_city, user_state, user_zip, user_phone)"
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+				String query = "INSERT INTO users (user_username, user_password, user_pin, user_locked, user_status, user_firstname, user_lastname, user_street, user_city, user_state, user_zip, user_phone, user_checkedoutnumber)"
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
 
 				preparedStmt.setString(1, createuser);
@@ -240,6 +240,7 @@ public class CreateUser {
 				preparedStmt.setString(10, createstate);
 				preparedStmt.setString(11, createzip);
 				preparedStmt.setString(12, createphone);
+				preparedStmt.setString(13, createcheckedoutnumber);
 
 				System.out.println("Attempting database connection..\n");
 				preparedStmt.execute();

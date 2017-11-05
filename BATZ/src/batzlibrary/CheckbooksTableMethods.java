@@ -1,9 +1,12 @@
 package batzlibrary;
 
-public class CheckbooksUpdateTable {
+import java.sql.ResultSet;
+import java.time.LocalDate;
+
+public class CheckbooksTableMethods {
 	SQL s = new SQL();
 	
-	public void setCheckedOutDateOnBook(String checkoutDate, String checkbooksID) {
+	public void setCheckedOutDateOnBook(LocalDate checkoutDate, String checkbooksID) {
 		String query = "UPDATE checkbooks SET checkbooks_datecheckedout = '" + checkoutDate + "' WHERE checkbooks_id = '" + checkbooksID + "'";
 		s.SQLConnForUpdatingSingleRecord(query);
 	}
@@ -18,8 +21,15 @@ public class CheckbooksUpdateTable {
 		s.SQLConnForUpdatingSingleRecord(query);
 	}
 	
-	public void setReturnDateOnBook(String returnDate, String checkbooksID) {
+	public void setReturnDateOnBook(LocalDate returnDate, String checkbooksID) {
 		String query = "UPDATE checkbooks SET checkbooks_datetoreturn = '" + returnDate + "' WHERE checkbooks_id = '" + checkbooksID + "'";
 		s.SQLConnForUpdatingSingleRecord(query);
+	}
+	
+	public ResultSet getCheckbookAvailable(String isbn){
+		ResultSet check = null;
+		String query = "SELECT checkbooks_id FROM checkbooks WHERE checkbooks_ISBN = '" + isbn + "' AND checkbooks_pin IS NULL";
+		check = s.SQLConnMain(query);
+		return check;
 	}
 }
