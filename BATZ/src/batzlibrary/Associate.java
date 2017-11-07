@@ -7,6 +7,7 @@ public class Associate /* extends Member */ {
 
 	// for passing to createUser() method
 	String userstatus = "associate";
+	UsersTable ut = new UsersTable();
 
 	SQL s = new SQL();
 	boolean bool;
@@ -61,7 +62,7 @@ public class Associate /* extends Member */ {
 				cu.createUser(userstatus);
 				break;
 			case 2:
-				scanPin();
+				ut.scanPin();
 				break;
 			case 3:
 				case3();
@@ -80,7 +81,7 @@ public class Associate /* extends Member */ {
 		}
 	}
 
-	public void scanPin() {
+/*	public void scanPin() {
 		// String pin = "";
 		Scanner scanp = new Scanner(System.in);
 
@@ -102,7 +103,7 @@ public class Associate /* extends Member */ {
 		}
 
 	}
-
+*/
 	public void case3() {
 		while (true) {
 			CheckOutBook cob = new CheckOutBook();

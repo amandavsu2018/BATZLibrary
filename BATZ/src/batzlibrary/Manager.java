@@ -8,9 +8,8 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Manager {
-
-	// for passing to createUser() method
 	String userstatus = "manager";
+	UsersTable ut = new UsersTable();
 
 	public Manager() {
 	}
@@ -47,7 +46,7 @@ public class Manager {
 						break;
 					} else if (choice == 6) {
 						break;
-					}  else if (choice == 7) {
+					} else if (choice == 7) {
 						break;
 					} else if (choice == 8) {
 						sessionOpen = false;
@@ -71,12 +70,6 @@ public class Manager {
 			case 2:
 				createBook();
 				break;
-			/*
-			 * System.out.
-			 * println("What would you like to do next? 1. Main Menu, 2. Create another book"
-			 * ); String x = choicescan.nextLine(); if (x.equals("1")) { actionsMa(); } else
-			 * if (x.equals("2")) { createBook(); } else { break; }
-			 */
 			case 3:
 				editUser();
 				break;
@@ -90,7 +83,7 @@ public class Manager {
 			// sessionOpen = false;
 			// break;
 			case 6:
-				scanPin();
+				ut.scanPin();
 				break;
 			case 7:
 				CheckInBook cib = new CheckInBook();
@@ -414,8 +407,8 @@ public class Manager {
 				cb.setBookTitle(bookTitle);
 				System.out.println("Enter book authors seperated by commas.");
 				cb.setBookAuthors(scan.nextLine().trim());
-				//System.out.println("Enter book ISBN number.");
-				//cb.setISBN(scan.nextLine().trim());
+				// System.out.println("Enter book ISBN number.");
+				// cb.setISBN(scan.nextLine().trim());
 				System.out.println("Enter book publication year.");
 				cb.setBookPubYear(scan.nextLine().trim());
 				System.out.println("Enter book keywords seperated by commas.");
@@ -463,29 +456,6 @@ public class Manager {
 			System.out.println("You need to enter an ISBN that is either 10 numbers or 13 numbers");
 			createBook();
 		}
-	}
-
-	public void scanPin() {
-		String pin = "";
-		Scanner scanp = new Scanner(System.in);
-
-		System.out.println("Enter user's pin: ");
-		pin = scanp.nextLine();
-		while (true) {
-			boolean pinExists = false;
-			String query = "SELECT * FROM users WHERE user_pin = '" + pin + "'";
-			CheckUserExists cue = new CheckUserExists();
-			cue.setPin(pin);
-			pinExists = cue.checkIfPinExistsInDB(query);
-			if (pinExists == true) {
-				cue.connect();
-				break;
-			} else {
-				System.out.println("Try Again. Please enter a valid pin");
-				scanPin();
-			}
-		}
-
 	}
 
 }
