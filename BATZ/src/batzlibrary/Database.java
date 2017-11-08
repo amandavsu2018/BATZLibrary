@@ -14,7 +14,7 @@ public class Database {
 	
 	public String getDatabase(){
 		try{
-			File infile = new File("src/batzlibrary/database.txt");
+			File infile = new File("BATZ/src/batzlibrary/database.txt");
 			BufferedReader br = new BufferedReader(new FileReader(infile));
 			this.database = br.readLine();
 		} catch (IOException e) {
@@ -25,7 +25,7 @@ public class Database {
 	
 	public String getDatabaseUser(){
 		try{
-			File infile = new File("src/batzlibrary/database.txt");
+			File infile = new File("BATZ/src/batzlibrary/database.txt");
 			BufferedReader br = new BufferedReader(new FileReader(infile));
 			for(int i=0; i < 1; i++){
 				br.readLine();
@@ -39,7 +39,7 @@ public class Database {
 	
 	public String getDatabasePassword(){
 		try{
-			File infile = new File("src/batzlibrary/database.txt");
+			File infile = new File("BATZ/src/batzlibrary/database.txt");
 			BufferedReader br = new BufferedReader(new FileReader(infile));
 			for(int i=0; i < 2; i++){
 				br.readLine();
@@ -53,7 +53,7 @@ public class Database {
 	
 	public String dataBase(){
 		try{
-			File infile = new File("src/batzlibrary/database.txt");
+			File infile = new File("BATZ/src/batzlibrary/database.txt");
 			Scanner dataFile = new Scanner(infile);
 			database = dataFile.nextLine();
 			user = dataFile.nextLine();

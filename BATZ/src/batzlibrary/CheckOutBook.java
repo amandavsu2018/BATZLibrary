@@ -17,18 +17,6 @@ public class CheckOutBook {
 	String title = "";
 	String choice = "";
 	
-	//Returns the current date
-	public LocalDate getCurrentDate() {
-		LocalDate today = LocalDate.now();
-		return today;
-	}
-	
-	//Returns date 2 weeks from current
-	public LocalDate getTwoWeeksDate(LocalDate today) {
-		LocalDate twoWeeksAdd = today.plus(2, ChronoUnit.WEEKS);
-		return twoWeeksAdd;
-	}
-	
 	public boolean checkUserExists(String pinnum) {
 		boolean cuebool = false;
 		String query = "SELECT * FROM users WHERE user_pin = '" + pinnum + "'";
@@ -41,30 +29,20 @@ public class CheckOutBook {
 	}
 	
 	public boolean checkCorrectUser(String pinnum) {
-		boolean cuebool = false;
+		boolean ccubool;
 		String query = "SELECT * FROM users WHERE user_pin = '" + pinnum + "'";
-		CheckUserExists cue = new CheckUserExists();
-		cue.setPin(pinnum);
-		cuebool = cue.checkIfPinExistsInDB(query);
-		if(cuebool == true) {
-			cue.connect();
-		}
-		System.out.println("\nIs this the correct user? (y/n)");
-		Scanner scanp = new Scanner(System.in);
-		while(true) {
-			choice = scanp.nextLine();
-			if(choice.equals("y") || choice.equals("Y") || choice.equals("yes")) {
-				cuebool = true;
-				break;
-			} else if(choice.equals("n") || choice.equals("N") || choice.equals("no")) {
-				cuebool = false;
-				break;
-			} else {
-				System.out.println("Please enter a 'y' or an 'n'");
-			}
-		}
-		
-		return cuebool;
+		String question = "\nIs this the correct user?";
+		BATZUtils utils = new BATZUtils();
+		UsersTable usertable = new UsersTable();
+		usertable.setPin(pinnum);
+		ccubool = usertable.checkIfPinExistsInDB(query);
+		if(ccubool == true) {
+			usertable.connect();
+			
+			Scanner scanp = new Scanner(System.in);
+			ccubool = utils.yesOrNo(question);
+		} 
+		return ccubool;
 	}
 	
 	public boolean checkUserLockedStatus(String pin) {
@@ -83,8 +61,10 @@ public class CheckOutBook {
 		boolean bool = false;
 		String[] bookinfo = {"Title: ", "Authors: ", "ISBN: ", "Publication Year: ", "Keywords: "};
 		String var = "";
-		CheckBookExists cbe = new CheckBookExists();
-		ResultSet result = cbe.returnExistingBook(isbn);
+		String question = "\nIs this the correct book? (y/n)";
+		BATZUtils utils = new BATZUtils();
+		BooksTable bt = new BooksTable();
+		ResultSet result = bt.returnExistingBook(isbn);
 		try{
 			while(result.next()){
 				for (int i = 1; i < 6; i++) {
@@ -98,6 +78,7 @@ public class CheckOutBook {
 			e.printStackTrace();
 		}
 		
+		/*
 		System.out.println("\nIs this the correct book? (y/n)");
 		Scanner scanp = new Scanner(System.in);
 		while(true) {
@@ -112,38 +93,47 @@ public class CheckOutBook {
 				System.out.println("Please enter a 'y' or an 'n'");
 			}
 		}
+		*/
+		utils.yesOrNo(question);
 		
 		return bool;
 	}
 	
 	public void checkOut(String isbnnum, String pinnum) {
-		CheckbooksTableMethods cbtm = new CheckbooksTableMethods();
+		CheckBooksTable cbt = new CheckBooksTable();
 		ResultSet result = null;
 		boolean cobool = false;
 		String checkbooksid = "";
 		
 		//check if books are not all checked out
-		result = cbtm.getCheckbookAvailable(isbnnum);
+		result = cbt.getCheckbookAvailable(isbnnum);
 		try{
 			if(result.first() == true){
 				checkbooksid = result.getString(1);
 				checkOutBook(checkbooksid, pinnum);
 				System.out.println("Book Checked out successfully!\n");
 			} else {
-				System.out.println("This book's inventory is currently all checked out.\n");
-				System.out.println("Would you like to place a hold on this book? (y/n)");
+				/*String question = "This book's inventory is currently all checked out.\n\nWould you like to place a hold on this book? (y/n)";
 				Scanner scanp = new Scanner(System.in);
 				while(true) {
 					choice = scanp.nextLine();
 					if(choice.equals("y") || choice.equals("Y") || choice.equals("yes")) {
-						BookqueueTableMethods bqtm = new BookqueueTableMethods();
-						bqtm.setBookHold(isbnnum, pinnum);
+						BooksQueueTable bqt = new BooksQueueTable();
+						bqt.setBookHold(isbnnum, pinnum);
 						break;
 					} else if(choice.equals("n") || choice.equals("N") || choice.equals("no")) {
 						break;
 					} else {
 						System.out.println("Please enter a 'y' or an 'n'");
 					}
+				}*/
+				String question = "This book's inventory is currently all checked out.\n\nWould you like to place a hold on this book? (y/n)";
+				Scanner scanp = new Scanner(System.in);
+				BATZUtils utils = new BATZUtils();
+				cobool = utils.yesOrNo(question);
+				if(cobool == true) {
+					BooksQueueTable bqt = new BooksQueueTable();
+					bqt.setBookHold(isbnnum, pinnum);
 				}
 			}
 		} catch (SQLException e){
@@ -156,10 +146,11 @@ public class CheckOutBook {
 	public boolean checkOutBook(String checkbookid, String pinnum) {
 		CheckbooksTableMethods cbtm = new CheckbooksTableMethods();
 		UsersTableCheckout utc = new UsersTableCheckout();
+		BATZUtils utils = new BATZUtils();
 		int amount = 0;
 		String getAmount = "";
-		LocalDate today = getCurrentDate();
-		LocalDate twoWeeksDate = getTwoWeeksDate(today);
+		LocalDate today = utils.getCurrentDate();
+		LocalDate twoWeeksDate = utils.getTwoWeeksDate(today);
 		
 		//update checbooks table
 		cbtm.setCheckedOutDateOnBook(today, checkbookid);
@@ -173,39 +164,6 @@ public class CheckOutBook {
 		getAmount = Integer.toString(amount);
 		utc.setAmountCheckedOut(pinnum, getAmount);
 		
-/*		//This updates the number of books checkout for the user
-		String checkNum = "SELECT checkedoutnumber FROM users WHERE user_name = '" + MemberUserName + "'";
-		ResultSet result = s.SQLConnMain(checkNum);
-		String userMax = "";
-		try {
-			//Needed to get the info because result stores the information like an array
-			while(result.next()) {
-			 userMax = result.getString(1);
-			}
-			
-		} 
-		catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		
-		int num = Integer.parseInt(userMax);
-		int max = num + 1;
-		String newUpdate = Integer.toString(max);
-		
-		String update = "Update users SET user_checkedoutnumber ='" + newUpdate +"'" + "WHERE usere_pin = '" + Pin + "'"; 
-		ResultSet rzlt = s.SQLConnMain(update); 
-		
-		//grabs the current time
-		LocalDate checkTime = Checkout();
-		//This sets the return date
-		LocalDate returnTime = Return(checkTime);
-		
-		//Inserts a new row with this info ( might have to modify code after this -- how to change later when someone wants this book after-----)
-		String insert = "INSERT INTO checkbooks (checkbooks_id, checkbooks_ISBN, checkbooks_title, checkbooks_datecheckedout, checkbooks_datetoreturn, checkbooks_pin) VALUES( '" + isbn +", "+ id +", "+ title +"," + checkTime+"," + returnTime +","+ Pin + ")" ;
-		ResultSet rezlt1 = s.SQLConnMain(insert);
-*/		
-		//System.out.println("The User " + FullName + " has successfully checked out" + title + " which is due on the "+ returnTime);
 		return true;
 	}
 }

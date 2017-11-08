@@ -9,7 +9,7 @@ public class JDBCdriver {
 	
 	public String jdbcDriver(){
 		try{
-			File infile = new File("src/batzlibrary/jdbcdriver.txt");
+			File infile = new File("BATZ/src/batzlibrary/jdbcdriver.txt");
 			Scanner dataFile = new Scanner(infile);
 			jdbc_driver = dataFile.nextLine();
 			dataFile.close();

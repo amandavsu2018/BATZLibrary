@@ -107,14 +107,15 @@ public class Associate /* extends Member */ {
 	public void case3() {
 		while (true) {
 			CheckOutBook cob = new CheckOutBook();
+			UsersTable userstable = new UsersTable();
 			System.out.println("Please enter the Member's library card number: ");
 			Scanner scanp = new Scanner(System.in);
 			pin = scanp.nextLine();
-			bool = cob.checkUserExists(pin);
+			bool = userstable.checkUserExists(pin);
 
 			// if user exists, check if corrent user
 			if (bool == true) {
-				bool = cob.checkCorrectUser(pin);
+				bool = userstable.checkCorrectUser(pin);
 			} else {
 				System.out.println("That library card number does not exists in the database.\n");
 				break;
@@ -122,7 +123,7 @@ public class Associate /* extends Member */ {
 
 			// if correct user, check if locked
 			if (bool == true) {
-				bool = cob.checkUserLockedStatus(pin);
+				bool = userstable.getUserLockedStatus(pin);
 			} else {
 				break;
 			}
@@ -135,12 +136,12 @@ public class Associate /* extends Member */ {
 			}
 
 			// check book ISBN number
-			CheckBookExists cbe = new CheckBookExists();
+			BooksTable bt = new BooksTable();
 			System.out.println("Please enter the ISBN of the book to checkout: ");
 			isbn = scanp.nextLine();
-			bool = cbe.checkIfISBNExists(isbn);
+			bool = bt.checkIfISBNExists(isbn);
 			if (bool == true) {
-				bool = cob.checkCorrectBook(isbn);
+				bool = bt.checkCorrectBook(isbn);
 			} else {
 				System.out.println("This book ISBN does not exist in the database.");
 				break;
@@ -148,8 +149,7 @@ public class Associate /* extends Member */ {
 
 			// user & author correct, check number of books checked out for user
 			if (bool == true) {
-				UsersTableCheckout utc = new UsersTableCheckout();
-				numberOfCheckedOutBooks = Integer.parseInt(utc.getAmountCheckedOut(pin));
+				numberOfCheckedOutBooks = Integer.parseInt(userstable.getAmountCheckedOut(pin));
 			} else {
 				break;
 			}
