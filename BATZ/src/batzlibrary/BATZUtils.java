@@ -20,6 +20,7 @@ public class BATZUtils {
 		return twoWeeksAdd;
 	}
 
+/* Don't use this method right now
 	public void printResultSet(ResultSet result, String[] stringArray, int start, int end) {
 		String var;
 		try {
@@ -35,7 +36,8 @@ public class BATZUtils {
 			e.printStackTrace();
 		}
 	}
-
+ */
+	
 	public boolean yesOrNo(String question) {
 		String choice;
 		boolean yonbool;

@@ -100,21 +100,20 @@ public class CheckOutBook {
 	}
 	
 	public void checkOut(String isbnnum, String pinnum) {
-		CheckbooksTableMethods cbtm = new CheckbooksTableMethods();
+		CheckBooksTable cbt = new CheckBooksTable();
 		ResultSet result = null;
 		boolean cobool = false;
 		String checkbooksid = "";
 		
 		//check if books are not all checked out
-		result = cbtm.getCheckbookAvailable(isbnnum);
+		result = cbt.getCheckbookAvailable(isbnnum);
 		try{
 			if(result.first() == true){
 				checkbooksid = result.getString(1);
 				checkOutBook(checkbooksid, pinnum);
 				System.out.println("Book Checked out successfully!\n");
 			} else {
-				System.out.println("This book's inventory is currently all checked out.\n");
-				System.out.println("Would you like to place a hold on this book? (y/n)");
+				/*String question = "This book's inventory is currently all checked out.\n\nWould you like to place a hold on this book? (y/n)";
 				Scanner scanp = new Scanner(System.in);
 				while(true) {
 					choice = scanp.nextLine();
@@ -127,6 +126,14 @@ public class CheckOutBook {
 					} else {
 						System.out.println("Please enter a 'y' or an 'n'");
 					}
+				}*/
+				String question = "This book's inventory is currently all checked out.\n\nWould you like to place a hold on this book? (y/n)";
+				Scanner scanp = new Scanner(System.in);
+				BATZUtils utils = new BATZUtils();
+				cobool = utils.yesOrNo(question);
+				if(cobool == true) {
+					BooksQueueTable bqt = new BooksQueueTable();
+					bqt.setBookHold(isbnnum, pinnum);
 				}
 			}
 		} catch (SQLException e){
