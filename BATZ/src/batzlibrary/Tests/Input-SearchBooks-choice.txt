@@ -1,0 +1,4 @@
+#choice
+UserInput Status:
+	Valid.
+	Invalid.

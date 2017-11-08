@@ -1,0 +1,8 @@
+
+Test Case 1  		(Key = 1.)
+   UserInput Status :  Valid
+
+
+Test Case 2  		(Key = 2.)
+   UserInput Status :  Invalid
+
