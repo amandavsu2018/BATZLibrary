@@ -40,7 +40,7 @@ public class Member {
 			switch (choice) {
 			case 1:
 				SearchBooks sb = new SearchBooks();
-				sb.KeywordInput();
+				sb.choice();
 				break;
 			case 2:
 				CheckInBook checkin = new CheckInBook();
