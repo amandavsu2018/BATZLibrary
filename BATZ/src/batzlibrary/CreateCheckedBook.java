@@ -13,6 +13,8 @@ public class CreateCheckedBook {
 		this.bookTitle = title;
 	}
 	
+	// ** TERRIBLY NAMED METHOD BY BRANDON, This is an add book to checkbooks table
+	// when a book exists in the books table; change this shit and put it in a better class **
 	public void checkBookExisting(String bookISBN, String bookTitle, String bookInvNum) {
 		String dateCheckedOut = null;
 		String dateToReturn = null;
@@ -31,12 +33,12 @@ public class CreateCheckedBook {
 	}
 	
 	public boolean checkBookUpdateWithoutCreatingNewBook(String isbn){
-		CheckBookExists cbe = new CheckBookExists();
+		BooksTable bt = new BooksTable();
 		Scanner scan = new Scanner(System.in);
 		BookInventory bi = new BookInventory();
 		String invnumber = bi.checkInventoryNumberViaISBN(isbn);
 		String ccbnumber = "";
-		ResultSet title = cbe.returnExistingTitle(isbn);
+		ResultSet title = bt.returnExistingTitle(isbn);
 		try{
 			while(title.next()){
 				bookTitle = title.getString(1);

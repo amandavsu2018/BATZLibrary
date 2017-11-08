@@ -288,7 +288,7 @@ public class Manager {
 		System.out.println("Please enter the book's ISBN.");
 		String isb = isbnnum.next();
 
-		CheckBookExists check = new CheckBookExists();
+		BooksTable check = new BooksTable();
 		if (check.checkIfISBNExists(isb)) {
 			System.out.println("What would you like to edit?\n");
 			System.out.println("1: Edit Title.");
@@ -392,14 +392,14 @@ public class Manager {
 				"Inventory Available: " };
 		String bookTitle = "", bookAuthors = "", bookISBN = null, bookPubYear = "", bookKeywords = "", bookInvNum = "";
 		CreateBook cb = new CreateBook();
-		CheckBookExists cbe = new CheckBookExists();
+		BooksTable bt = new BooksTable();
 
 		Scanner scan = new Scanner(System.in);
 
 		System.out.println("Enter book ISBN number: ");
 		bookISBN = scan.nextLine().trim();
 		if ((bookISBN != null) && ((bookISBN.length() == 10) || (bookISBN.length() == 13))) {
-			evaluate = cbe.checkIfISBNExists(bookISBN);
+			evaluate = bt.checkIfISBNExists(bookISBN);
 			if (evaluate == false) {
 				cb.setISBN(bookISBN);
 				System.out.println("Enter book title.");
@@ -419,7 +419,7 @@ public class Manager {
 				cb.createNewBook();
 			} else {
 				System.out.println("Book Exists in the database!\n");
-				ResultSet result = cbe.returnExistingBook(bookISBN);
+				ResultSet result = bt.returnExistingBook(bookISBN);
 				String book = "";
 				try {
 					while (result.next()) {
@@ -442,15 +442,7 @@ public class Manager {
 					ccb.checkBookUpdateWithoutCreatingNewBook(bookISBN);
 				} else if (scanned.equals("2")) {
 					actionsMa();
-				} else {
 				}
-				// else if (scanned.equals("3")) {
-				// System.out.println("Exiting.. Goodbye!");
-				// System.exit(1);
-				// } else {
-				// System.out.println("Invlaid choice. Defaulting to main screen.");
-				// actionsMa(); } } }
-				// System.out.println("Exiting.. Goodbye!");
 			}
 		} else {
 			System.out.println("You need to enter an ISBN that is either 10 numbers or 13 numbers");
