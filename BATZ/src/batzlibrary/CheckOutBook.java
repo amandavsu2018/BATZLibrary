@@ -16,7 +16,8 @@ public class CheckOutBook {
 	String isbn = "";
 	String title = "";
 	String choice = "";
-	
+
+/*
 	public boolean checkUserExists(String pinnum) {
 		boolean cuebool = false;
 		String query = "SELECT * FROM users WHERE user_pin = '" + pinnum + "'";
@@ -77,7 +78,7 @@ public class CheckOutBook {
 		} catch (SQLException e){
 			e.printStackTrace();
 		}
-		
+*/
 		/*
 		System.out.println("\nIs this the correct book? (y/n)");
 		Scanner scanp = new Scanner(System.in);
@@ -94,11 +95,12 @@ public class CheckOutBook {
 			}
 		}
 		*/
+/*	
 		utils.yesOrNo(question);
 		
 		return bool;
 	}
-	
+*/	
 	public void checkOut(String isbnnum, String pinnum) {
 		CheckBooksTable cbt = new CheckBooksTable();
 		ResultSet result = null;
@@ -106,7 +108,9 @@ public class CheckOutBook {
 		String checkbooksid = "";
 		
 		//check if books are not all checked out
-		result = cbt.getCheckbookAvailable(isbnnum);
+		cbt.setTableVariables();
+		result = cbt.getCheckbookAvailable(isbnnum, cbt.getTableName(), cbt.getTableBookID(), 
+				cbt.getTableBookISBN(), cbt.getTablePin());
 		try{
 			if(result.first() == true){
 				checkbooksid = result.getString(1);
