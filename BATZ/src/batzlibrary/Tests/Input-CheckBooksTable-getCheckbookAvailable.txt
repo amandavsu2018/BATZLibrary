@@ -1,0 +1,25 @@
+# isbn
+  isbn Status:
+  	Available.
+# tablenm
+  tablenm Status:
+  	Valid.
+  	Invalid.		[error]
+# tableid
+  tableid Status:
+  	Valid.			[property bt.checkBookExists]
+  	Invalid.		[error]
+  Inventory Exists:
+  	Available.		[if bt.checkBookExists]
+  	Not Available.	[if !bt.checkBookExists]
+# tableisbn
+  tableisbn Status:
+	Valid.
+	Invalid.		[error]
+# tablepin
+  tablepin Status:
+	Valid.			[property NULL]
+	Invalid.		[error]
+  Availability:
+  	Available.		[if NULL]
+  	Not Available.	[if !NULL]
