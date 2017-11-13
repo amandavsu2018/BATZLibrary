@@ -1,0 +1,9 @@
+checkbooks
+checkbooks_id
+checkbooks_ISBN
+checkbooks_title
+checkbooks_datecheckedout
+checkbooks_datetoreturn
+checkbooks_pin
+checkbooks_renewalcount
+checkbooks_dropbox
