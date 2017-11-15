@@ -1,0 +1,26 @@
+
+Test Case 1  		<error>
+   checkbookid Status :  Invalid
+
+
+Test Case 2  		<error>
+   pinnum Status :  Invalid
+
+
+Test Case 3  		(Key = 1.1.1.)
+   checkbookid Status :  Available
+   pinnum Status      :  Valid
+   pinnum Num Books   :  0-9
+
+
+Test Case 4  		(Key = 1.1.2.)
+   checkbookid Status :  Available
+   pinnum Status      :  Valid
+   pinnum Num Books   :  10
+
+
+Test Case 5  		(Key = 2.1.1.)
+   checkbookid Status :  On Hold
+   pinnum Status      :  Valid
+   pinnum Num Books   :  0-9
+

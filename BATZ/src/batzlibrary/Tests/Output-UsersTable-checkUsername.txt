@@ -1,0 +1,8 @@
+
+Test Case 1  		(Key = 1.)
+   user Status :  Available
+
+
+Test Case 2  		(Key = 2.)
+   user Status :  Unavailable
+

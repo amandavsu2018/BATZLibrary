@@ -1,0 +1,22 @@
+# choice
+  UserInput Status:
+	Valid.
+	Invalid.	[error]
+
+# ISBNInput
+  String Content:
+	Choices:
+		Spaces.
+		Special Characters.
+		Numbers.
+		Negative Numbers.
+		Blanks.
+
+# KeywordInput
+  String Content:
+        Choices:
+                Spaces.
+                Special Characters.
+                Numbers.
+                Negative Numbers.
+                Blanks.
