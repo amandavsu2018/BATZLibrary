@@ -1,5 +1,7 @@
 package batzlibrary;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
@@ -7,6 +9,8 @@ import java.util.Scanner;
 
 public class UsersTable {
 	SQL s = new SQL();
+	String utablename, utableid, utableusername, utablepw, utablepin, utablelocked, utablestatus, 
+		utablefname, utablelname, utablestreet, utablecity, utablestate, utablezip, utablephone, utablecheckedoutnum;
 	String pin;
 	String query = "";
 	String[] user = new String[11];
@@ -64,11 +68,11 @@ public class UsersTable {
 		return cuebool;
 	}
 	
-	public Boolean checkUsername(String user, boolean bool) {
-		bool = true;
+	public Boolean checkUsername(String user) {
+		boolean bool = true;
 		ResultSet result = null;
 		
-		String query = "SELECT * FROM users WHERE user_username = '" + user + "'";
+		String query = "SELECT * FROM " + utablename + " WHERE " + utableusername + " = '" + user + "'";
 		result = s.SQLConnMain(query);
 		
 		try{
@@ -83,8 +87,8 @@ public class UsersTable {
 		return bool;
 	}
 	
-	public Boolean checkUserPassword(String user, String pass, boolean bool) {
-		bool = true;
+	public Boolean checkUserPassword(String user, String pass) {
+		boolean bool = true;
 		ResultSet result = null;
 		
 		String query = "SELECT user_password FROM users WHERE user_username = '" + user + "'";
@@ -334,5 +338,150 @@ public class UsersTable {
 				e.printStackTrace();				
 			}
 		}
+	}
+	
+	public void setTableVariables() {
+		try{
+			File infile = new File("src/batzlibrary/users.txt");
+			Scanner dataFile = new Scanner(infile);
+			utablename = dataFile.nextLine();
+			utableid = dataFile.nextLine();
+			utableusername = dataFile.nextLine();
+			utablepw = dataFile.nextLine();
+			utablepin = dataFile.nextLine();
+			utablelocked = dataFile.nextLine();
+			utablestatus = dataFile.nextLine();
+			utablefname = dataFile.nextLine();
+			utablelname = dataFile.nextLine();
+			utablestreet = dataFile.nextLine();
+			utablecity = dataFile.nextLine();
+			utablestate = dataFile.nextLine();
+			utablezip = dataFile.nextLine();
+			utablephone = dataFile.nextLine();
+			utablecheckedoutnum = dataFile.nextLine();
+			dataFile.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String getUtablename() {
+		return utablename;
+	}
+
+	public void setUtablename(String utablename) {
+		this.utablename = utablename;
+	}
+
+	public String getUtableid() {
+		return utableid;
+	}
+
+	public void setUtableid(String utableid) {
+		this.utableid = utableid;
+	}
+
+	public String getUtableusername() {
+		return utableusername;
+	}
+
+	public void setUtableusername(String utableusername) {
+		this.utableusername = utableusername;
+	}
+
+	public String getUtablepw() {
+		return utablepw;
+	}
+
+	public void setUtablepw(String utablepw) {
+		this.utablepw = utablepw;
+	}
+
+	public String getUtablepin() {
+		return utablepin;
+	}
+
+	public void setUtablepin(String utablepin) {
+		this.utablepin = utablepin;
+	}
+
+	public String getUtablelocked() {
+		return utablelocked;
+	}
+
+	public void setUtablelocked(String utablelocked) {
+		this.utablelocked = utablelocked;
+	}
+
+	public String getUtablestatus() {
+		return utablestatus;
+	}
+
+	public void setUtablestatus(String utablestatus) {
+		this.utablestatus = utablestatus;
+	}
+
+	public String getUtablefname() {
+		return utablefname;
+	}
+
+	public void setUtablefname(String utablefname) {
+		this.utablefname = utablefname;
+	}
+
+	public String getUtablelname() {
+		return utablelname;
+	}
+
+	public void setUtablelname(String utablelname) {
+		this.utablelname = utablelname;
+	}
+
+	public String getUtablestreet() {
+		return utablestreet;
+	}
+
+	public void setUtablestreet(String utablestreet) {
+		this.utablestreet = utablestreet;
+	}
+
+	public String getUtablecity() {
+		return utablecity;
+	}
+
+	public void setUtablecity(String utablecity) {
+		this.utablecity = utablecity;
+	}
+
+	public String getUtablestate() {
+		return utablestate;
+	}
+
+	public void setUtablestate(String utablestate) {
+		this.utablestate = utablestate;
+	}
+
+	public String getUtablezip() {
+		return utablezip;
+	}
+
+	public void setUtablezip(String utablezip) {
+		this.utablezip = utablezip;
+	}
+
+	public String getUtablephone() {
+		return utablephone;
+	}
+
+	public void setUtablephone(String utablephone) {
+		this.utablephone = utablephone;
+	}
+
+	public String getUtablecheckedoutnum() {
+		return utablecheckedoutnum;
+	}
+
+	public void setUtablecheckedoutnum(String utablecheckedoutnum) {
+		this.utablecheckedoutnum = utablecheckedoutnum;
 	}
 }

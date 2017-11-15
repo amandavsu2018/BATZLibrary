@@ -12,6 +12,10 @@ public class CreateUser {
 	public Random random = new Random();
 	public SQL s = new SQL();
 	UsersTable ut = new UsersTable();
+	
+	public CreateUser(){
+		ut.setTableVariables();
+	}
 
 	public String createPassword() {
 		String pass = "";
@@ -71,13 +75,11 @@ public class CreateUser {
 		String createfname = "", createlname = "", createstreet = "", createcity = "", createstate = "";
 		String createzip = "", createphone = "", createcheckedoutnumber = "0";
 
-		boolean checkBool = false;
-
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Please enter username.");
 		createuser = scan.nextLine();
 		// Check to see if user exists
-		boolean cubool = ut.checkUsername(createuser, checkBool);
+		boolean cubool = ut.checkUsername(createuser);
 		if (cubool == true) {
 			System.out.println("User already exists.");
 			createuser = ut.replaceUsername(createuser);

@@ -1,0 +1,15 @@
+users
+user_id
+user_username
+user_password
+user_pin
+user_locked
+user_status
+user_firstname
+user_lastname
+user_street
+user_city
+user_state
+user_zip
+user_phone
+user_checkedoutnumber

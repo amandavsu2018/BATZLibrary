@@ -19,19 +19,20 @@ public class Login {
 	UsersTable ut = new UsersTable();
 
 	public void logIn() {
+		ut.setTableVariables();
 		System.out.println("Login.\n");
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Username: ");
 		username = scan.nextLine();
 
-		boolean userlogin = ut.checkUsername(username, checkBool);
+		boolean userlogin = ut.checkUsername(username);
 
 		if (userlogin == true) {
 			System.out.println("User exists\n");
 			System.out.println("Password: ");
 			password = scan.nextLine();
 			checkBool = false;
-			userlogin = ut.checkUserPassword(username, password, checkBool);
+			userlogin = ut.checkUserPassword(username, password);
 			if (userlogin == true) {
 				System.out.println("Username and password match, LOGIN!");
 				sessionOpen = true;
