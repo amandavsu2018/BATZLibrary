@@ -6,17 +6,18 @@
 # ISBNInput
   String Content:
 	Choices:
-		Spaces.
-		Special Characters.
+		Spaces.					[error]
+		Special Characters.		[error]
 		Numbers.
-		Negative Numbers.
-		Blanks.
+		Negative Numbers.		[error]
+		Blanks.					[error]
 
 # KeywordInput
   String Content:
         Choices:
+                Letters.
                 Spaces.
-                Special Characters.
+                Special Characters.		[error]
                 Numbers.
-                Negative Numbers.
-                Blanks.
+                Negative Numbers.		[error]
+                Blanks.					[error]
