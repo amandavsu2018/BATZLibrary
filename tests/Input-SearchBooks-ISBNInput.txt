@@ -1,0 +1,9 @@
+# ISBNInput
+  String Content:
+	Choices:
+		Letters.					[error]
+		Spaces.						[error]
+		Special Characters.			[error]
+		Numbers.
+		Negative Numbers.			[error]
+		Blanks.						[error]

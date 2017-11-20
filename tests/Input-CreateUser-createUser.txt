@@ -1,0 +1,17 @@
+# status
+  status Status:
+  	Member.					[error]
+  	Associate.				
+  	Manager.				[property Manager]
+  checkUsername Status:
+  	Available.
+  	Unavailable.
+  createPassword Status:
+  	Valid.
+  generatePin Status:
+  	Valid.
+  assignStatus Status:			
+  	Member.					[single]
+  	Associate.
+  	Manager.				[if Manager]
+  	Exit.

@@ -1,0 +1,9 @@
+# KeywordInput
+  String Content:
+        Choices:
+                Letters.
+                Letters w/ Spaces.			
+                Special Characters.			[error]
+                Numbers.
+                Negative Numbers.			[error]
+                Blanks.						[error]

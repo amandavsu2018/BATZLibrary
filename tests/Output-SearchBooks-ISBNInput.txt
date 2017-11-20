@@ -1,0 +1,24 @@
+
+Test Case 1  		<error>
+   Choices :  Letters
+
+
+Test Case 2  		<error>
+   Choices :  Spaces
+
+
+Test Case 3  		<error>
+   Choices :  Special Characters
+
+
+Test Case 4  		<error>
+   Choices :  Negative Numbers
+
+
+Test Case 5  		<error>
+   Choices :  Blanks
+
+
+Test Case 6  		(Key = 4.)
+   Choices        :  Numbers
+
