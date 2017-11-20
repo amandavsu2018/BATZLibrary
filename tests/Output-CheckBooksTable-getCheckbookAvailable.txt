@@ -1,0 +1,26 @@
+
+Test Case 1  		<error>
+   tablenm Status :  Invalid
+
+
+Test Case 2  		<error>
+   tableid Status :  Invalid
+
+
+Test Case 3  		<error>
+   tableisbn Status :  Invalid
+
+
+Test Case 4  		<error>
+   tablepin Status :  Invalid
+
+
+Test Case 5  		(Key = 1.1.1.1.1.1.1.)
+   isbn Status      :  Available
+   tablenm Status   :  Valid
+   tableid Status   :  Valid
+   Inventory Exists :  Available
+   tableisbn Status :  Valid
+   tablepin Status  :  Valid
+   Availability     :  Available
+

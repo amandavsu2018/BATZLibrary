@@ -1,0 +1,12 @@
+# checkbookid
+  checkbookid Status:
+  	Available.
+  	On Hold.					[property onHold]
+  	Invalid.					[error]
+# pinnum  
+  pinnum Status:
+  	Valid.
+  	Invalid.					[error]
+  pinnum Num Books:
+  	0-9.
+  	10. 						[if !onHold]
