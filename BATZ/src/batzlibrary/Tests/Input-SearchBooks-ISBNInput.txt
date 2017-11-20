@@ -1,8 +1,9 @@
 # ISBNInput
   String Content:
 	Choices:
-		Spaces.
-		Special Characters.
+		Letters.					[error]
+		Spaces.						[error]
+		Special Characters.			[error]
 		Numbers.
-		Negative Numbers.
-		Blanks.
+		Negative Numbers.			[error]
+		Blanks.						[error]
