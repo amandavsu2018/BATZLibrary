@@ -16,7 +16,7 @@ Test Case 4  		(Key = 1.)
 
 
 Test Case 5  		(Key = 2.)
-   Choices        :  Spaces
+   Choices        :  Letters w/ Spaces
 
 
 Test Case 6  		(Key = 4.)

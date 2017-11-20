@@ -1,8 +1,8 @@
 
-Test Case 1  		(Key = 1.)
-   UserInput Status :  Valid
-
-
-Test Case 2  		(Key = 2.)
+Test Case 1  		<error>
    UserInput Status :  Invalid
+
+
+Test Case 2  		(Key = 1.)
+   UserInput Status :  Valid
 

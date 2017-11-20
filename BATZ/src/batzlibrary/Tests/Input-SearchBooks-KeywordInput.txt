@@ -2,7 +2,7 @@
   String Content:
         Choices:
                 Letters.
-                Spaces.
+                Letters w/ Spaces.			
                 Special Characters.			[error]
                 Numbers.
                 Negative Numbers.			[error]
