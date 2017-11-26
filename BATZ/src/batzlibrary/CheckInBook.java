@@ -64,7 +64,7 @@ public class CheckInBook {
 		result = sql.SQLConnMain(query);
 		
 		try {
-			while(result.next()) {
+			while(result.next() == true) {
 				pin = result.getString(i);
 				getAmount = utc.getAmountCheckedOut(pin);
 				amount = Integer.parseInt(getAmount);
@@ -107,7 +107,7 @@ public class CheckInBook {
 		}
 		*/
 		
-		query = "UPDATE checkbooks SET checkbooks_datecheckedout = 'NULL', checkbooks_datetoreturn = 'NULL', checkbooks_pin = 'NULL', checkbooks_renewalcount = 'NULL', checkbooks_dropbox = 'NULL' WHERE checkbooks_dropbox = 'true'";
+		query = "UPDATE checkbooks SET checkbooks_datecheckedout = NULL, checkbooks_datetoreturn = NULL, checkbooks_pin = NULL, checkbooks_renewalcount = '0', checkbooks_dropbox = '0' WHERE checkbooks_dropbox = 'true'";
 		sql.SQLConnForUpdatingSingleRecord(query);	
 	}
 
