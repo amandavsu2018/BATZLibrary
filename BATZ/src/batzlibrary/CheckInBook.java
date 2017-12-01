@@ -52,20 +52,24 @@ public class CheckInBook {
 	// Needs to check for late fees before updating
 	public void checkDropBox() {
 		SQL sql = new SQL();
-		String query = "";
+		CalculateFines cf = new CalculateFines();
+		String query1 = "";
 		ResultSet result = null;
 		int amount = 0;
 		String getAmount = "";
-		String pin = "";
+		String pin = "", isbn = "";
 		int i = 1;
 		UsersTableCheckout utc = new UsersTableCheckout();
 		
-		query = "SELECT checkbooks_pin FROM checkbooks WHERE checkbooks_dropbox = 'true'";
-		result = sql.SQLConnMain(query);
+		query1 = "SELECT checkbooks_pin, checkbooks_ISBN FROM checkbooks WHERE checkbooks_dropbox = 'true'";
+		result = sql.SQLConnMain(query1);
 		
 		try {
 			while(result.next() == true) {
 				pin = result.getString(i);
+				i++;
+				isbn = result.getString(i);
+				cf.BookFine(pin, isbn);
 				getAmount = utc.getAmountCheckedOut(pin);
 				amount = Integer.parseInt(getAmount);
 				amount--;
@@ -107,8 +111,8 @@ public class CheckInBook {
 		}
 		*/
 		
-		query = "UPDATE checkbooks SET checkbooks_datecheckedout = NULL, checkbooks_datetoreturn = NULL, checkbooks_pin = NULL, checkbooks_renewalcount = '0', checkbooks_dropbox = '0' WHERE checkbooks_dropbox = 'true'";
-		sql.SQLConnForUpdatingSingleRecord(query);	
+		query1 = "UPDATE checkbooks SET checkbooks_datecheckedout = NULL, checkbooks_datetoreturn = NULL, checkbooks_pin = NULL, checkbooks_renewalcount = '0', checkbooks_dropbox = '0' WHERE checkbooks_dropbox = 'true'";
+		sql.SQLConnForUpdatingSingleRecord(query1);	
 	}
 
 }
