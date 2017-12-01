@@ -1,6 +1,7 @@
 package batzlibrary;
 
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Associate /* extends Member */ {
@@ -49,6 +50,8 @@ public class Associate /* extends Member */ {
 					} else if (choice == 6) {
 						sessionOpen = false;
 						break;
+					} else if (choice == 696) {
+						break;
 					} else {
 						sessionOpen = false;
 						break;
@@ -76,6 +79,9 @@ public class Associate /* extends Member */ {
 				break;
 			case 5:
 				disHolds();
+				break;
+			case 696:
+				wormHole();
 				break;
 			default:
 				sessionOpen = false;
@@ -160,5 +166,26 @@ public class Associate /* extends Member */ {
 			System.out.println("Please enter a valid pin");
 		}
 		
+	}
+	
+	private void wormHole() {
+		SQL sql = new SQL();
+		BATZUtils bu = new BATZUtils();
+		int timetravel;
+		String omgwut, lunchmoney;
+		LocalDate today = bu.getCurrentDate();
+		LocalDate wormhole;
+		String pushtotable;
+		System.out.println("Welcome to the Wormhole. What time period would you like to visit?\n");
+		Scanner hammertime = new Scanner(System.in);
+		timetravel = hammertime.nextInt();
+		wormhole = bu.subtractDays(today, timetravel);
+		System.out.println("Please enter the pin number of the Average Joe you want to change.");
+		omgwut = hammertime.next();
+		System.out.println("Please enter the ISBN number that Average Joe has checked out.");
+		lunchmoney = hammertime.next();
+		pushtotable = "UPDATE checkbooks SET checkbooks_datecheckedout = '" + wormhole + "'WHERE checkbooks_pin = '" + 
+				omgwut + "' AND checkbooks_ISBN = '" + lunchmoney + "'";
+		sql.SQLConnForUpdatingSingleRecord(pushtotable);
 	}
 }
