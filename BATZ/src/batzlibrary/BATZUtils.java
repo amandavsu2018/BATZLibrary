@@ -19,30 +19,12 @@ public class BATZUtils {
 		LocalDate twoWeeksAdd = today.plus(2, ChronoUnit.WEEKS);
 		return twoWeeksAdd;
 	}
-	
+
 	public LocalDate subtractDays(LocalDate today, int timetravel) {
 		LocalDate subtract = today.minus(timetravel, ChronoUnit.DAYS);
 		return subtract;
 	}
 
-/* Don't use this method right now
-	public void printResultSet(ResultSet result, String[] stringArray, int start, int end) {
-		String var;
-		try {
-			while (result.next()) {
-				for (int i = start; i <= end; i++) {
-					var = result.getString(i + 1);
-					System.out.print(i - 1);
-					System.out.println(var);
-				}
-				System.out.println("");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
- */
-	
 	public boolean yesOrNo(String question) {
 		String choice;
 		boolean yonbool;

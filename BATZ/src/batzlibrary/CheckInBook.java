@@ -15,7 +15,6 @@ public class CheckInBook {
 		boolean sessionOpen = true;
 		Scanner scan = new Scanner(System.in);
 		Scanner scan1 = new Scanner(System.in);
-		// Not sure another way to get user pin
 		System.out.println("Please enter your pin... for security reasons...");
 		userpin = scan.next();
 		while (sessionOpen == true) {
@@ -49,7 +48,6 @@ public class CheckInBook {
 		}
 	}
 
-	// Needs to check for late fees before updating
 	public void checkDropBox() {
 		SQL sql = new SQL();
 		CalculateFines cf = new CalculateFines();
@@ -60,12 +58,12 @@ public class CheckInBook {
 		String pin = "", isbn = "";
 		int i = 1;
 		UsersTableCheckout utc = new UsersTableCheckout();
-		
+
 		query1 = "SELECT checkbooks_pin, checkbooks_ISBN FROM checkbooks WHERE checkbooks_dropbox = 'true'";
 		result = sql.SQLConnMain(query1);
-		
+
 		try {
-			while(result.next() == true) {
+			while (result.next() == true) {
 				pin = result.getString(i);
 				i++;
 				isbn = result.getString(i);
@@ -77,42 +75,12 @@ public class CheckInBook {
 				utc.setAmountCheckedOut(pin, getAmount);
 				i++;
 			}
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	
-		/*
-		query = "SELECT checkbooks_pin FROM checkbooks WHERE checkbooks_dropbox = 'true'";
-		result = sql.SQLConnMain(query);
-		
-		try{
-			while(result.next()){
-					pin = result.getString(i);
-					query = "SELECT user_checkedoutnumber FROM users WHERE user_pin = '" + pin + "'";
-					sql.SQLConnMain(query);
-					try {
-						while(result.next()) {
-							inv = result.getString(1);
-							x = Integer.parseInt(inv);
-							x--;
-							inv = Integer.toString(x);
-							query = "UPDATE users SET user_checkedoutnumber = inv WHERE user_pin = '" + pin + "'";
-							sql.SQLConnForUpdatingSingleRecord(query);
-						}
-					}
-					catch (SQLException e){
-					e.printStackTrace();
-					}
-					i++;
-				}
-				System.out.println("");
-		} catch (SQLException e){
-			e.printStackTrace();
-		}
-		*/
-		
+
 		query1 = "UPDATE checkbooks SET checkbooks_datecheckedout = NULL, checkbooks_datetoreturn = NULL, checkbooks_pin = NULL, checkbooks_renewalcount = '0', checkbooks_dropbox = '0' WHERE checkbooks_dropbox = 'true'";
-		sql.SQLConnForUpdatingSingleRecord(query1);	
+		sql.SQLConnForUpdatingSingleRecord(query1);
 	}
 
 }

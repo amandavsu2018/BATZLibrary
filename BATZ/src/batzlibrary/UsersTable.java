@@ -9,15 +9,16 @@ import java.util.Scanner;
 
 public class UsersTable {
 	SQL s = new SQL();
-	String utablename, utableid, utableusername, utablepw, utablepin, utablelocked, utablestatus, 
-		utablefname, utablelname, utablestreet, utablecity, utablestate, utablezip, utablephone, utablecheckedoutnum;
+	String utablename, utableid, utableusername, utablepw, utablepin, utablelocked, utablestatus, utablefname,
+			utablelname, utablestreet, utablecity, utablestate, utablezip, utablephone, utablecheckedoutnum;
 	String pin;
 	String query = "";
 	String[] user = new String[11];
-	String[] columns = {"Password: ", "Locked: ", "Status: ", "First Name: ", "Last Name: ", "Street: ", "City: ", "State: ", "Zip: ", "Phone: ", "Checked Out Books: "}; 
-	
+	String[] columns = { "Password: ", "Locked: ", "Status: ", "First Name: ", "Last Name: ", "Street: ", "City: ",
+			"State: ", "Zip: ", "Phone: ", "Checked Out Books: " };
+
 	public Random random = new Random();
-	
+
 	public boolean checkCorrectUser(String pinnum) {
 		boolean ccubool;
 		String query = "SELECT * FROM users WHERE user_pin = '" + pinnum + "'";
@@ -25,15 +26,15 @@ public class UsersTable {
 		BATZUtils utils = new BATZUtils();
 		setPin(pinnum);
 		ccubool = checkIfPinExistsInDB(query);
-		if(ccubool == true) {
+		if (ccubool == true) {
 			connect();
-			
+
 			Scanner scanp = new Scanner(System.in);
 			ccubool = utils.yesOrNo(question);
-		} 
+		}
 		return ccubool;
 	}
-	
+
 	public boolean checkIfPinExistsInDB(String query) {
 		boolean checkIfPinExists = false;
 		ResultSet result = s.SQLConnMain(query);
@@ -60,23 +61,23 @@ public class UsersTable {
 		}
 		return checkIfPinExists;
 	}
-	
+
 	public boolean checkUserExists(String pinnum) {
 		boolean cuebool = false;
 		String query = "SELECT * FROM users WHERE user_pin = '" + pinnum + "'";
 		cuebool = checkIfPinExistsInDB(query);
 		return cuebool;
 	}
-	
+
 	public Boolean checkUsername(String user) {
 		boolean bool = true;
 		ResultSet result = null;
-		
+
 		String query = "SELECT * FROM " + utablename + " WHERE " + utableusername + " = '" + user + "'";
 		result = s.SQLConnMain(query);
-		
-		try{
-			if(result.first()){
+
+		try {
+			if (result.first()) {
 				bool = true;
 			} else {
 				bool = false;
@@ -86,18 +87,18 @@ public class UsersTable {
 		}
 		return bool;
 	}
-	
+
 	public Boolean checkUserPassword(String user, String pass) {
 		boolean bool = true;
 		ResultSet result = null;
-		
+
 		String query = "SELECT user_password FROM users WHERE user_username = '" + user + "'";
 		result = s.SQLConnMain(query);
-		
-		try{
-			if(result.next()){
+
+		try {
+			if (result.next()) {
 				String temp = result.getString(1);
-				if(temp.equals(pass)){
+				if (temp.equals(pass)) {
 					bool = true;
 				} else {
 					bool = false;
@@ -110,67 +111,67 @@ public class UsersTable {
 		}
 		return bool;
 	}
-	
+
 	public String getAmountCheckedOut(String pin) {
 		String amount = null;
 		String query = "SELECT user_checkedoutnumber FROM users WHERE user_pin = '" + pin + "'";
 		ResultSet result = s.SQLConnMain(query);
-		
+
 		try {
-			if(result.next()) {
+			if (result.next()) {
 				amount = result.getString(1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return amount;
 	}
-	
+
 	public void setAmountCheckedOut(String pin, String amount) {
 		String query = "UPDATE users SET user_checkedoutnumber = '" + amount + "' WHERE user_pin = '" + pin + "'";
 		s.SQLConnForUpdatingSingleRecord(query);
 	}
-	
-	public String getFirstname(String user, String fname){
+
+	public String getFirstname(String user, String fname) {
 		ResultSet result = null;
 		String query = "SELECT user_firstname FROM users WHERE user_username = '" + user + "'";
-		result = s.SQLConnMain(query);	
-		
-		try{
-			if(result.next()){
+		result = s.SQLConnMain(query);
+
+		try {
+			if (result.next()) {
 				fname = result.getString(1);
 			}
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return fname;
 	}
-	
-	public String getStatus(String user, String status){
+
+	public String getStatus(String user, String status) {
 		ResultSet result = null;
 		String query = "SELECT user_status FROM users WHERE user_username = '" + user + "'";
 		result = s.SQLConnMain(query);
-		
-		try{
-			if(result.next()){
+
+		try {
+			if (result.next()) {
 				status = result.getString(1);
 			}
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return status;
 	}
-	
+
 	public boolean getUserLockedStatus(String pin) {
 		boolean lockedornot = false;
 		String status = "";
 		String query = "SELECT user_locked FROM users WHERE user_pin = '" + pin + "'";
 		ResultSet result = s.SQLConnMain(query);
 		try {
-			if(result.next()) {
+			if (result.next()) {
 				status = result.getString(1);
-				if(status.equals("true")) {
+				if (status.equals("true")) {
 					lockedornot = true;
 				} else {
 					lockedornot = false;
@@ -179,7 +180,7 @@ public class UsersTable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return lockedornot;
 	}
 
@@ -209,24 +210,23 @@ public class UsersTable {
 		}
 		return user;
 	}
-	
-	
+
 	public String generatePin() {
 		String pin = "";
-		
-		//create the pin here, run the checks below
+
+		// create the pin here, run the checks below
 		pin = String.format("%04d", random.nextInt(9999));
-		
+
 		String query = "SELECT * FROM users WHERE user_pin = '" + pin + "'";
 		ResultSet result = s.SQLConnMain(query);
-		
+
 		try {
 			int blah = 1;
 			if (result.next()) {
 				System.out.println(result.getString(blah));
 
 				String temp = result.getString(blah);
-				
+
 				if (temp.equals(0)) {
 					return pin;
 				} else {
@@ -260,11 +260,11 @@ public class UsersTable {
 			}
 		}
 	}
-	
+
 	public void setPin(String pinnum) {
 		this.pin = pinnum;
 	}
-	
+
 	public void getUserPassword(String pin) {
 		query = "SELECT user_password FROM users WHERE user_pin = '" + pin + "'";
 		user[0] = query;
@@ -319,11 +319,11 @@ public class UsersTable {
 		query = "SELECT user_checkedoutnumber FROM users WHERE user_pin = '" + pin + "'";
 		user[10] = query;
 	}
-	
+
 	public void connect() {
 		ResultSet result = null;
 		int count = 0;
-		for(String st : user) {
+		for (String st : user) {
 			result = s.SQLConnMain(st);
 			try {
 				if (result.first()) {
@@ -331,17 +331,17 @@ public class UsersTable {
 					System.out.println(result.getString(1));
 					count++;
 				} else {
-					 System.out.println(result.next());
-					 System.out.println("Error");
+					System.out.println(result.next());
+					System.out.println("Error");
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();				
+				e.printStackTrace();
 			}
 		}
 	}
-	
+
 	public void setTableVariables() {
-		try{
+		try {
 			File infile = new File("src/batzlibrary/users.txt");
 			Scanner dataFile = new Scanner(infile);
 			utablename = dataFile.nextLine();

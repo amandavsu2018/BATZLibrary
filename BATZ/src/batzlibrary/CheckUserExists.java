@@ -12,19 +12,20 @@ public class CheckUserExists {
 	SQL s = new SQL();
 	String query = "";
 	String[] user = new String[11];
-	String[] columns = {"Password: ", "Locked: ", "Status: ", "First Name: ", "Last Name: ", "Street: ", "City: ", "State: ", "Zip: ", "Phone: ", "Checked Out Books: "}; 
-	
+	String[] columns = { "Password: ", "Locked: ", "Status: ", "First Name: ", "Last Name: ", "Street: ", "City: ",
+			"State: ", "Zip: ", "Phone: ", "Checked Out Books: " };
+
 	public void setPin(String pinnum) {
 		this.pin = pinnum;
 	}
-	
+
 	public boolean checkPinOnly() {
 		boolean bool = false;
 		String query = "SELECT * FROM users WHERE user_pin = '" + pin + "'";
 		ResultSet result = s.SQLConnMain(query);
-		
+
 		try {
-			if(result.first()) {
+			if (result.first()) {
 				bool = true;
 			} else {
 				bool = false;
@@ -32,10 +33,10 @@ public class CheckUserExists {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return bool;
 	}
-	
+
 	public boolean checkIfPinExistsInDB(String query) {
 		boolean checkIfPinExists = false;
 		ResultSet result = s.SQLConnMain(query);
@@ -117,11 +118,11 @@ public class CheckUserExists {
 		query = "SELECT user_checkedoutnumber FROM users WHERE user_pin = '" + pin + "'";
 		user[10] = query;
 	}
-	
+
 	public void connect() {
 		ResultSet result = null;
 		int count = 0;
-		for(String st : user) {
+		for (String st : user) {
 			result = s.SQLConnMain(st);
 			try {
 				if (result.first()) {
@@ -129,11 +130,11 @@ public class CheckUserExists {
 					System.out.println(result.getString(1));
 					count++;
 				} else {
-					 System.out.println(result.next());
-					 System.out.println("Error");
+					System.out.println(result.next());
+					System.out.println("Error");
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();				
+				e.printStackTrace();
 			}
 		}
 	}

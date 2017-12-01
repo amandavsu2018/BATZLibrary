@@ -20,9 +20,9 @@ public class SQL {
 			// databaseUser from 2nd,
 			// and databasePass from 3rd
 			Connection conn = DriverManager.getConnection(database, databaseUser, databasePass);
-			
-			//String query is passed in from other classes
-			
+
+			// String query is passed in from other classes
+
 			// This is Java PreparedStatement, it creates the object
 			// preparedStatement which has the
 			// conn variable data and the database query variable. It will be
@@ -47,7 +47,6 @@ public class SQL {
 		return result;
 	}
 
-
 	public boolean SQLConnForMoreThanOnePreparedStatement(String query, String[] stringArray) {
 		Database db = new Database();
 		String database = new String(db.getDatabase());
@@ -56,20 +55,20 @@ public class SQL {
 		ResultSet result = null;
 		try {
 			Connection conn = DriverManager.getConnection(database, databaseUser, databasePass);
-			PreparedStatement statement = conn.prepareStatement(query); 
-			for(int i = 0; i < stringArray.length; i++){
-				statement.setString(i+1, stringArray[i]);
+			PreparedStatement statement = conn.prepareStatement(query);
+			for (int i = 0; i < stringArray.length; i++) {
+				statement.setString(i + 1, stringArray[i]);
 			}
 			statement.execute();
 			conn.close();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return true;
 	}
-	
-	public void SQLConnForUpdatingSingleRecord(String query){
+
+	public void SQLConnForUpdatingSingleRecord(String query) {
 		Database db = new Database();
 		String database = new String(db.getDatabase());
 		String databaseUser = new String(db.getDatabaseUser());

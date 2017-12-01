@@ -12,14 +12,14 @@ public class CreateUser {
 	public Random random = new Random();
 	public SQL s = new SQL();
 	UsersTable ut = new UsersTable();
-	
-	public CreateUser(){
+
+	public CreateUser() {
 		ut.setTableVariables();
 	}
 
 	public String createPassword() {
 		String pass = "";
-		int passlength = 7; // change to determine length of password
+		int passlength = 7;
 		String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456790";
 		for (int i = 0; i < passlength; i++) {
 			pass += alphabet.charAt(random.nextInt(alphabet.length()));

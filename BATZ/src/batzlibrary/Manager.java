@@ -30,8 +30,6 @@ public class Manager {
 			// get the choice
 			while (true) {
 				Scanner choicescan = new Scanner(System.in);
-				// these need to be here in order to set choice variable
-				// to a number 1-4 and nothing else
 				try {
 					choice = Integer.parseInt(choicescan.nextLine());
 					if (choice == 1) {
@@ -58,7 +56,6 @@ public class Manager {
 				} catch (NumberFormatException nfe) {
 					System.out.print("Try again: ");
 				}
-				// choicescan.close();
 			}
 
 			// switch cases
@@ -79,9 +76,6 @@ public class Manager {
 			case 5:
 				reactivateUser();
 				break;
-			// case 5:
-			// sessionOpen = false;
-			// break;
 			case 6:
 				ut.scanPin();
 				break;
@@ -93,9 +87,6 @@ public class Manager {
 				sessionOpen = false;
 				break;
 			}
-			// sessionOpen = false;
-			// System.out.println("Exiting.. Goodbye!");
-			// System.exit(1);
 		}
 	}
 
@@ -119,13 +110,7 @@ public class Manager {
 				reactivateUser();
 			}
 		}
-		/*
-		 * System.out.
-		 * println("What would you like to do? 1. Go back to main prompt, 2. Exit");
-		 * promptChoice = scan.nextLine(); if (promptChoice.equals("1")) { actionsMa();
-		 * } else { scan.close(); System.out.println("Exiting.. Goodbye!");
-		 * System.exit(1); }
-		 */}
+	}
 
 	public void editUser() {
 		int choice = 0;
@@ -138,8 +123,6 @@ public class Manager {
 		Scanner pinscan = new Scanner(System.in);
 		System.out.println("Please enter user's pin number.");
 		String pin = pinscan.next();
-
-		// We need to add a checkPin() method later to check for existing pin
 
 		System.out.println("What would you like to edit?\n");
 		System.out.println("1: Generate New Password.");
@@ -155,8 +138,6 @@ public class Manager {
 		System.out.println("11: Exit.");
 		Scanner choicescan = new Scanner(System.in);
 		while (true) {
-			// these need to be here in order to set choice variable
-			// to a number 1-4 and nothing else
 			try {
 				choice = Integer.parseInt(choicescan.nextLine());
 				if (choice == 1) {
@@ -361,12 +342,6 @@ public class Manager {
 				query1 = "UPDATE books SET book_keywords = '" + keyword + "'WHERE book_ISBN = '" + isb + "'";
 				run = 1;
 				break;
-			/*
-			 * Need to meet together to talk about how to do this!!!! case 6:
-			 * System.out.println("Inventory Number: "); String invnum = scan.nextLine();
-			 * query1 = "UPDATE books SET book_invnum = '" + invnum + "'WHERE book_ISBN = '"
-			 * + isb + "'"; break;
-			 */
 			default:
 				break;
 			}
@@ -407,8 +382,6 @@ public class Manager {
 				cb.setBookTitle(bookTitle);
 				System.out.println("Enter book authors seperated by commas.");
 				cb.setBookAuthors(scan.nextLine().trim());
-				// System.out.println("Enter book ISBN number.");
-				// cb.setISBN(scan.nextLine().trim());
 				System.out.println("Enter book publication year.");
 				cb.setBookPubYear(scan.nextLine().trim());
 				System.out.println("Enter book keywords seperated by commas.");

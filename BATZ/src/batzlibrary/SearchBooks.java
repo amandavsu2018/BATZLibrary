@@ -11,7 +11,7 @@ public class SearchBooks {
 	public void choice() {
 		String num = "";
 		boolean sessionOpen = true;
-		
+
 		while (sessionOpen == true) {
 			Scanner how = new Scanner(System.in);
 			System.out.println("How would you like to search? 1. ISBN, 2. Keyword, 3. Exit");
@@ -69,13 +69,14 @@ public class SearchBooks {
 		query = "SELECT * FROM books WHERE book_keywords LIKE '%" + keyword + "%'";
 		result = s.SQLConnMain(query);
 
-		String[] variables = new String[]{"Title: ", "Authors: ", "ISBN: ", "Publication Year: ", "Keywords: ", "Inventory Available: "};
-		
+		String[] variables = new String[] { "Title: ", "Authors: ", "ISBN: ", "Publication Year: ", "Keywords: ",
+				"Inventory Available: " };
+
 		try {
-			 while(result.next()) {
+			while (result.next()) {
 				for (int i = 2; i < 8; i++) {
 					book = result.getString(i);
-					System.out.print(variables[i-2]);
+					System.out.print(variables[i - 2]);
 					System.out.println(book);
 				}
 				System.out.println("");

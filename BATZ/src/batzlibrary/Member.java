@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Member {
 
-	public Member(){
+	public Member() {
 	}
 
 	public void actionsMe() {
@@ -24,10 +24,10 @@ public class Member {
 						break;
 					} else if (choice == 2) {
 						break;
-					}else if (choice == 3) {
+					} else if (choice == 3) {
 						sessionOpen = false;
 						break;
-					}else {
+					} else {
 						sessionOpen = false;
 						break;
 					}

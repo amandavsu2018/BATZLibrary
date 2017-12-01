@@ -9,7 +9,7 @@ public class Associate /* extends Member */ {
 	// for passing to createUser() method
 	String userstatus = "associate";
 	UsersTable ut = new UsersTable();
-	
+
 	SQL s = new SQL();
 	boolean bool;
 	String choice = "";
@@ -139,13 +139,13 @@ public class Associate /* extends Member */ {
 			} else {
 				break;
 			}
-			
+
 			// if numberOfCheckedOutBooks < 10, proceed
-			if(numberOfCheckedOutBooks < 10){
+			if (numberOfCheckedOutBooks < 10) {
 				cob.checkOut(isbn, pin);
 				break;
 			} else {
-				System.out.println("You have 10 books checked out already. You are allowed a maximum of 10 books." );
+				System.out.println("You have 10 books checked out already. You are allowed a maximum of 10 books.");
 				break;
 			}
 		}
@@ -157,17 +157,16 @@ public class Associate /* extends Member */ {
 		Scanner scanp = new Scanner(System.in);
 		pin = scanp.nextLine();
 		bool = userstable.checkUserExists(pin);
-		
-		if(bool == true) {
+
+		if (bool == true) {
 			BooksQueueTable bqt = new BooksQueueTable();
 			bqt.displayHolds(pin);
-		}
-		else {
+		} else {
 			System.out.println("Please enter a valid pin");
 		}
-		
+
 	}
-	
+
 	private void wormHole() {
 		SQL sql = new SQL();
 		BATZUtils bu = new BATZUtils();
@@ -184,8 +183,8 @@ public class Associate /* extends Member */ {
 		omgwut = hammertime.next();
 		System.out.println("Please enter the ISBN number that Average Joe has checked out.");
 		lunchmoney = hammertime.next();
-		pushtotable = "UPDATE checkbooks SET checkbooks_datecheckedout = '" + wormhole + "'WHERE checkbooks_pin = '" + 
-				omgwut + "' AND checkbooks_ISBN = '" + lunchmoney + "'";
+		pushtotable = "UPDATE checkbooks SET checkbooks_datecheckedout = '" + wormhole + "'WHERE checkbooks_pin = '"
+				+ omgwut + "' AND checkbooks_ISBN = '" + lunchmoney + "'";
 		sql.SQLConnForUpdatingSingleRecord(pushtotable);
 	}
 }
