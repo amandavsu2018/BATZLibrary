@@ -73,7 +73,7 @@ public class CreateUser {
 		String createuser = null;
 		String createpass = "", createpin = "", createlocked = "", createstatus = null;
 		String createfname = "", createlname = "", createstreet = "", createcity = "", createstate = "";
-		String createzip = "", createphone = "", createcheckedoutnumber = "0";
+		String createzip = "", createphone = "", createcheckedoutnumber = "0", createfines = "0";
 
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Please enter username.");
@@ -107,10 +107,10 @@ public class CreateUser {
 			System.out.println("Enter Phone:");
 			createphone = scan.nextLine().trim();
 
-			String query = "INSERT INTO users (user_username, user_password, user_pin, user_locked, user_status, user_firstname, user_lastname, user_street, user_city, user_state, user_zip, user_phone, user_checkedoutnumber)"
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			String query = "INSERT INTO users (user_username, user_password, user_pin, user_locked, user_status, user_firstname, user_lastname, user_street, user_city, user_state, user_zip, user_phone, user_checkedoutnumber, user_fines)"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			String[] arr = { createuser, createpass, createpin, createlocked, createstatus, createfname, createlname,
-					createstreet, createcity, createstate, createzip, createphone, createcheckedoutnumber };
+					createstreet, createcity, createstate, createzip, createphone, createcheckedoutnumber, createfines };
 			s.SQLConnForMoreThanOnePreparedStatement(query, arr);
 
 			System.out.println("Updated database successfully.");

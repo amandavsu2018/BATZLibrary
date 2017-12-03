@@ -17,7 +17,7 @@ public class CreateCheckedBook {
 		String dateCheckedOut = null;
 		String dateToReturn = null;
 		String pin = null;
-		String renewalCount = null;
+		String renewalCount = "0";
 		String dropbox = "0";
 
 		int bookInv = Integer.parseInt(bookInvNum);

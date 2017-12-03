@@ -25,7 +25,7 @@ public class Associate /* extends Member */ {
 		boolean sessionOpen = true;
 		while (sessionOpen == true) {
 			int choice = 0;
-			System.out.println("What would you like to do?");
+			System.out.println("\n" + "What would you like to do?");
 			System.out.println("1: Add User to Database.");
 			System.out.println("2: Display User Info. ");
 			System.out.println("3: Checkout Book for Member");
@@ -167,7 +167,7 @@ public class Associate /* extends Member */ {
 
 	}
 
-	private void wormHole() {
+	public void wormHole() {
 		SQL sql = new SQL();
 		BATZUtils bu = new BATZUtils();
 		int timetravel;

@@ -25,8 +25,9 @@ public class Manager {
 			System.out.println("4: Edit Book.");
 			System.out.println("5: Reactivate a User Account");
 			System.out.println("6: Display User Info");
-			System.out.println("7: Check In Books From Dropbox ");
-			System.out.println("8: Exit.");
+			System.out.println("7: Checkout Book for Member ");
+			System.out.println("8: Check In Books From Dropbox ");
+			System.out.println("9: Exit.");
 			// get the choice
 			while (true) {
 				Scanner choicescan = new Scanner(System.in);
@@ -47,8 +48,13 @@ public class Manager {
 					} else if (choice == 7) {
 						break;
 					} else if (choice == 8) {
+						break;
+					} else if (choice == 9) {
 						sessionOpen = false;
 						break;
+					} else if (choice == 696) {
+						sessionOpen = false;
+						break; 
 					} else {
 						sessionOpen = false;
 						break;
@@ -57,7 +63,8 @@ public class Manager {
 					System.out.print("Try again: ");
 				}
 			}
-
+			
+			Associate a = new Associate();
 			// switch cases
 			switch (choice) {
 			case 1:
@@ -80,8 +87,14 @@ public class Manager {
 				ut.scanPin();
 				break;
 			case 7:
+				a.checkOutBk();
+				break;
+			case 8:
 				CheckInBook cib = new CheckInBook();
 				cib.checkDropBox();
+				break;
+			case 696:
+				a.wormHole();
 				break;
 			default:
 				sessionOpen = false;
@@ -276,8 +289,8 @@ public class Manager {
 			System.out.println("2: Edit Author.");
 			System.out.println("3: Edit ISBN.");
 			System.out.println("4: Edit Publishing Year.");
-			System.out.println("5: Edit Keywords. (Enter keywords seperated by commas.)");
-			System.out.println("6: Edit Inventory Number. (do not use)");
+			System.out.println("5: Edit Keywords. (Enter keywords seperated by commas)");
+			System.out.println("6: Edit Inventory Number.");
 			System.out.println("7: Exit.");
 			Scanner choicescan = new Scanner(System.in);
 			while (true) {
@@ -342,6 +355,9 @@ public class Manager {
 				query1 = "UPDATE books SET book_keywords = '" + keyword + "'WHERE book_ISBN = '" + isb + "'";
 				run = 1;
 				break;
+			case 6:
+				CreateCheckedBook ccb = new CreateCheckedBook();
+				ccb.checkBookUpdateWithoutCreatingNewBook(isb);
 			default:
 				break;
 			}

@@ -11,9 +11,9 @@ public class CheckUserExists {
 	String pin = "";
 	SQL s = new SQL();
 	String query = "";
-	String[] user = new String[11];
+	String[] user = new String[12];
 	String[] columns = { "Password: ", "Locked: ", "Status: ", "First Name: ", "Last Name: ", "Street: ", "City: ",
-			"State: ", "Zip: ", "Phone: ", "Checked Out Books: " };
+			"State: ", "Zip: ", "Phone: ", "Checked Out Books: ", "Fines: " };
 
 	public void setPin(String pinnum) {
 		this.pin = pinnum;
@@ -55,6 +55,7 @@ public class CheckUserExists {
 				getUserZip(pin);
 				getUserPhone(pin);
 				getCheckedOutNum(pin);
+				getFines(pin);
 			} else {
 				checkIfPinExists = false;
 			}
@@ -118,7 +119,12 @@ public class CheckUserExists {
 		query = "SELECT user_checkedoutnumber FROM users WHERE user_pin = '" + pin + "'";
 		user[10] = query;
 	}
-
+	
+	public void getFines(String pin) {
+		query = "SELECT user_fines FROM users WHERE user_pin = '" + pin + "'";
+		user[11] = query;
+	}
+	
 	public void connect() {
 		ResultSet result = null;
 		int count = 0;

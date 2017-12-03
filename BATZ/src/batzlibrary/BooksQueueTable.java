@@ -21,7 +21,7 @@ public class BooksQueueTable {
 		String query = "SELECT * FROM bookqueue WHERE bookqueue_pin = '" + pin + "'";
 		result = s.SQLConnMain(query);
 		try {
-			System.out.println("Books user " + pin + "has on hold: ");
+			System.out.println("Books user " + pin + " has on hold: ");
 			while (result.next()) {
 				for (int j = 1; j < 2; j++) {
 					var = result.getString(j + 1);
