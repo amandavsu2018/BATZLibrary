@@ -25,7 +25,6 @@ public class Associate /* extends Member */ {
 		boolean sessionOpen = true;
 		while (sessionOpen == true) {
 			int choice = 0;
-			System.out.println("\n" + "What would you like to do?");
 			System.out.println("1: Add User to Database.");
 			System.out.println("2: Display User Info. ");
 			System.out.println("3: Checkout Book for Member");

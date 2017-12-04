@@ -18,7 +18,6 @@ public class Manager {
 		boolean sessionOpen = true;
 		while (sessionOpen == true) {
 			int choice = 0;
-			System.out.println("What would you like to do?\n");
 			System.out.println("1: Add User to Database.");
 			System.out.println("2: Create book listing.");
 			System.out.println("3: Edit User Account.");
