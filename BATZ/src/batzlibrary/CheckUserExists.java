@@ -11,20 +11,21 @@ public class CheckUserExists {
 	String pin = "";
 	SQL s = new SQL();
 	String query = "";
-	String[] user = new String[11];
-	String[] columns = {"Password: ", "Locked: ", "Status: ", "First Name: ", "Last Name: ", "Street: ", "City: ", "State: ", "Zip: ", "Phone: ", "Checked Out Books: "}; 
-	
+	String[] user = new String[12];
+	String[] columns = { "Password: ", "Locked: ", "Status: ", "First Name: ", "Last Name: ", "Street: ", "City: ",
+			"State: ", "Zip: ", "Phone: ", "Checked Out Books: ", "Fines: " };
+
 	public void setPin(String pinnum) {
 		this.pin = pinnum;
 	}
-	
+
 	public boolean checkPinOnly() {
 		boolean bool = false;
 		String query = "SELECT * FROM users WHERE user_pin = '" + pin + "'";
 		ResultSet result = s.SQLConnMain(query);
-		
+
 		try {
-			if(result.first()) {
+			if (result.first()) {
 				bool = true;
 			} else {
 				bool = false;
@@ -32,10 +33,10 @@ public class CheckUserExists {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return bool;
 	}
-	
+
 	public boolean checkIfPinExistsInDB(String query) {
 		boolean checkIfPinExists = false;
 		ResultSet result = s.SQLConnMain(query);
@@ -54,6 +55,7 @@ public class CheckUserExists {
 				getUserZip(pin);
 				getUserPhone(pin);
 				getCheckedOutNum(pin);
+				getFines(pin);
 			} else {
 				checkIfPinExists = false;
 			}
@@ -118,10 +120,15 @@ public class CheckUserExists {
 		user[10] = query;
 	}
 	
+	public void getFines(String pin) {
+		query = "SELECT user_fines FROM users WHERE user_pin = '" + pin + "'";
+		user[11] = query;
+	}
+	
 	public void connect() {
 		ResultSet result = null;
 		int count = 0;
-		for(String st : user) {
+		for (String st : user) {
 			result = s.SQLConnMain(st);
 			try {
 				if (result.first()) {
@@ -129,11 +136,11 @@ public class CheckUserExists {
 					System.out.println(result.getString(1));
 					count++;
 				} else {
-					 System.out.println(result.next());
-					 System.out.println("Error");
+					System.out.println(result.next());
+					System.out.println("Error");
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();				
+				e.printStackTrace();
 			}
 		}
 	}

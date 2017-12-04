@@ -11,16 +11,16 @@ import java.time.Instant;
 public class ReactivateUser {
 	String pinnumber = "";
 	SQL s = new SQL();
-	
-	public void setPin(String pin){
+
+	public void setPin(String pin) {
 		this.pinnumber = pin;
 	}
-	
-	public boolean checkIfPinExistsInDB(String query){
+
+	public boolean checkIfPinExistsInDB(String query) {
 		boolean checkIfPinExists = false;
 		ResultSet result = s.SQLConnMain(query);
-		try{
-			if(result.first()){
+		try {
+			if (result.first()) {
 				checkIfPinExists = true;
 			} else {
 				checkIfPinExists = false;
@@ -30,8 +30,8 @@ public class ReactivateUser {
 		}
 		return checkIfPinExists;
 	}
-	
-	public boolean updateLockedStatusInDB(){
+
+	public boolean updateLockedStatusInDB() {
 		String query = "UPDATE users SET user_locked = 'false' WHERE user_pin = '" + pinnumber + "'";
 		s.SQLConnMain(query);
 		return true;

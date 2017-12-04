@@ -11,9 +11,9 @@ public class Database {
 	String user = null;
 	String pass = null;
 	int countlines = 0;
-	
-	public String getDatabase(){
-		try{
+
+	public String getDatabase() {
+		try {
 			File infile = new File("src/batzlibrary/database.txt");
 			BufferedReader br = new BufferedReader(new FileReader(infile));
 			this.database = br.readLine();
@@ -22,12 +22,12 @@ public class Database {
 		}
 		return database;
 	}
-	
-	public String getDatabaseUser(){
-		try{
+
+	public String getDatabaseUser() {
+		try {
 			File infile = new File("src/batzlibrary/database.txt");
 			BufferedReader br = new BufferedReader(new FileReader(infile));
-			for(int i=0; i < 1; i++){
+			for (int i = 0; i < 1; i++) {
 				br.readLine();
 			}
 			this.user = br.readLine();
@@ -36,12 +36,12 @@ public class Database {
 		}
 		return user;
 	}
-	
-	public String getDatabasePassword(){
-		try{
+
+	public String getDatabasePassword() {
+		try {
 			File infile = new File("src/batzlibrary/database.txt");
 			BufferedReader br = new BufferedReader(new FileReader(infile));
-			for(int i=0; i < 2; i++){
+			for (int i = 0; i < 2; i++) {
 				br.readLine();
 			}
 			this.pass = br.readLine();
@@ -50,20 +50,19 @@ public class Database {
 		}
 		return pass;
 	}
-	
-	public String dataBase(){
-		try{
+
+	public String dataBase() {
+		try {
 			File infile = new File("src/batzlibrary/database.txt");
 			Scanner dataFile = new Scanner(infile);
 			database = dataFile.nextLine();
 			user = dataFile.nextLine();
 			pass = dataFile.nextLine();
 			dataFile.close();
-		} catch (IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return database;
 	}
 }
-
