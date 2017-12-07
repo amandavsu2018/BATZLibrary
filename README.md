@@ -1,7 +1,7 @@
 # group3
 Brandon Corbett has checked in.   
 Amanda Mitchell has checked in.  
-Thara Larkins has checked in.
+Thara Larkins has checked in.  
 Zackery Weeks has checked in.  
 
 
