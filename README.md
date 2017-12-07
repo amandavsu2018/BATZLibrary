@@ -1,4 +1,4 @@
-# group3
+# group3 BATZ Library
 Brandon Corbett has checked in.   
 Amanda Mitchell has checked in.  
 Thara Larkins has checked in.  
