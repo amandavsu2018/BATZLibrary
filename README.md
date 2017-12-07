@@ -2,7 +2,6 @@
 Amanda Mitchell has checked in.  
 Zackery Weeks has checked in.  
 Brandon Corbett has checked in.
-
 Thara Larkins has checked in.
 
 
@@ -34,7 +33,7 @@ Thara Larkins has checked in.
       2.	Display User Info
       3.	Checkout Book for Member 
       4.	Check In Books From Dropbox
-      5.	 Display Holds for User
+      5.	Display Holds for User
       6.	Exit
 7.	If option 1 is selected you will be prompted to create a new user:
         1.	Enter username(if username already exists it will add a incrementing number)
