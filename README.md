@@ -79,8 +79,10 @@ Zackery Weeks has checked in.
 		      1. The program will display the pin is invalid if you enter a pin that does not exist
 		      2. If the pin exist, the users holds shall be shown
 		      
-12.	If option 6 is selected the program will exit the session
+12.	If option 6 is selected the program will exit the session  
 
+						
+						**Continued from Login**
 5. (continued from step 5) if Member is selected you will have the option to:
 
 		1. Search for books
@@ -107,6 +109,7 @@ Zackery Weeks has checked in.
 
 10.	If 3 is selected(Exit) the session will end
 
+						**Continued from Login**
 5.(continued from step 5) As a Manager you may choose: 
 
         1. Add User to Database.
