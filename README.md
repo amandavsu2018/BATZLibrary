@@ -186,7 +186,7 @@ If option 4 (edit book) is selected you will be prompted to enter the book’s i
 
 2.	if option 2 is selected you will be prompted to enter the Author
 
-3	if option 3 is selected you will be prompted to enter the ISBN
+3.	if option 3 is selected you will be prompted to enter the ISBN
 
 4.	if option 4 is selected you will be prompted to enter the publishing year
 
