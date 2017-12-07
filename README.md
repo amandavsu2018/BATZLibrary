@@ -1,10 +1,12 @@
 # group3
+Brandon Corbett has checked in.   
 Amanda Mitchell has checked in.  
-Zackery Weeks has checked in.  
-Brandon Corbett has checked in.  
 Thara Larkins has checked in.
+Zackery Weeks has checked in.  
 
 
+  
+  
 1.	Our program requires the MariaDB JDBC jar file in order to run correctly. It can be obtained by following the download link listed       below.
       1.	https://downloads.mariadb.com/Connectors/java/connector-java-2.2.0/mariadb-java-client-2.2.0.jar
       2.	In Eclipse, click on Project -> Properties -> Java Build Path -> Add External JARs.
@@ -41,32 +43,32 @@ Thara Larkins has checked in.
 7.	If option 1 is selected you will be prompted to create a new user:
 
         1.	Enter username(if username already exists it will add a incrementing number)
-        2.	The password will be Auto generated
-        3.	The user pin will be Auto generated
-        4.	You will have the option to create the member status
-              i.	Member
-              ii.	Associate
-        5.	Enter the Users first name
-        6.	Enter the user’s last name
-        7.	Enter the user's address
-        8.	Enter the users City
-        9.	Enter the user's state
-        10.	Enter the user's phone number.
+        2. The password will be Auto generated
+        3. The user pin will be Auto generated
+        4. You will have the option to create the member status
+		 i. Member
+		 ii. Associate
+        5. Enter the Users first name
+        6. Enter the user’s last name
+        7. Enter the user's address
+        8. Enter the users City
+        9. Enter the user's state
+        10. Enter the user's phone number.
 	
 8.	If option 2 is selected you will be prompted to enter the user's pin
 
 	      1.You will be asked if the current users name is the user you are looking for
-			  i.	If no is entered it will re-prompt you to put in the user’s pin.
-			  ii.	If yes is entered it will fetch the users information and display it.
+			  i. If no is entered it will re-prompt you to put in the user’s pin.
+			  ii. If yes is entered it will fetch the users information and display it.
 	  
 9.	If option 3 is selected you will be prompted to enter the user’s Library card (Aka: user pin)
 
-	      1.	If the pin does not exist, you will be prompted it is not in the database
-	      2.	If the pin does exist and the user is locked out, you will be prompted of the user being locked out and to contact a manager
-	      3.	If the pin does exist and the user is not locked out, you shall be prompted to enter the ISBN of the book to check out	
-	      i.	If the book is not in the database, you shall be prompted
-	      4.	If the book is there, and you have 10 books checked out, you will be denied the ability to checkout
-	      5.	If the book is there and the user has not hit their 10 book limit:
+	      1. If the pin does not exist, you will be prompted it is not in the database
+	      2. If the pin does exist and the user is locked out, you will be prompted of the user being locked out and to contact a manager
+	      3. If the pin does exist and the user is not locked out, you shall be prompted to enter the ISBN of the book to check out	
+	     		 i.If the book is not in the database, you shall be prompted
+	      4. If the book is there, and you have 10 books checked out, you will be denied the ability to checkout
+	      5. If the book is there and the user has not hit their 10 book limit:
 			    i.	The book will be checkout
 			    ii.	Or the book’s inventory is completely checked out and the user can have the option of being on the waiting list for a book.
 			    
@@ -74,8 +76,8 @@ Thara Larkins has checked in.
 
 11.	If option 5 is selected it will prompt  you for the members library card number(Aka User Pin number)
 
-		      1.	The program will display the pin is invalid if you enter a pin that does not exist
-		      2.	If the pin exist, the users holds shall be shown
+		      1. The program will display the pin is invalid if you enter a pin that does not exist
+		      2. If the pin exist, the users holds shall be shown
 		      
 12.	If option 6 is selected the program will exit the session
 
@@ -87,9 +89,9 @@ Thara Larkins has checked in.
 		
 6. if 1(Search for books) is selected you will be prompted on how you would want to search for a book
 
-	    1.	By Isbn
-	    2.	By Keyword
-	    3.	Exit
+	    1. By Isbn
+	    2. By Keyword
+	    3. Exit
     
 7. if 1 is selected, you will be prompted to enter the ISNB number and the books information will be shown
 
@@ -100,8 +102,8 @@ Thara Larkins has checked in.
 	    1.	The user will be asked to enter their pin
 	    2.	Then enter the isbn of the book
 	    3.	Then the book will be placed in inventory and you shall be asked if you would like to return another.
-		 1.	If yes, the user will be re-prompted to enter a pin.
-		 2.	If no, the user will be taken back to the main menu.
+			 1.	If yes, the user will be re-prompted to enter a pin.
+			 2.	If no, the user will be taken back to the main menu.
 
 10.	If 3 is selected(Exit) the session will end
 
@@ -119,24 +121,24 @@ Thara Larkins has checked in.
 	
 6. If option 1 (Add User to Database ) is selected you will be prompted to create a new user:
 
-        1.	Enter username(if username already exists it will add an incrementing number)
-        2.	The password will be Auto generated
-        3.	The user pin will be Auto generated
-        4.	You will have the option to create the member status
+        1. Enter username(if username already exists it will add an incrementing number)
+        2. The password will be Auto generated
+        3. The user pin will be Auto generated
+        4. You will have the option to create the member status
               i.	Member
               ii.	Associate
               iii.	Manager
-        5.	Enter the users first name
-        6.	Enter the user’s last name
-        7.	Enter the user's address
-        8.	Enter the users City
-        9.	Enter the user's state
-        10.	Enter the user's phone number.
+        5. Enter the users first name
+        6. Enter the user’s last name
+        7. Enter the user's address
+        8. Enter the users City
+        9. Enter the user's state
+        10. Enter the user's phone number.
 	
 7. If option 2 (Create book Listing) is selected, the user will be able to create a book listing.
 
         1. The user will be prompted to enter an ISBN number.
-            a.	If the ISBN number is not 10 or 13 characters long, the user will be re-prompted to enter an ISBN number.
+            	a.	If the ISBN number is not 10 or 13 characters long, the user will be re-prompted to enter an ISBN number.
         2. The user will be prompted to enter a book title.
         3. The user will be prompted to enter author.
         4. The user will be prompted to enter the book publishing year.
@@ -146,17 +148,17 @@ Thara Larkins has checked in.
 8. if option 3 (Edit User Account) is selected you will be prompted to enter the users pin number
 
 		 Once the pin number is entered you will have the following options:
-		  1.	Generate new password
-		  2.	Set lock for user
-		  3.	Edit Status
-		  4.	Edit First Name
-		  5.	Edit Last name
-		  6.	Edit Street Address
-		  7.	Edit City
-		  8.	Edit State
-		  9.	Enter Zip code
-		  10.	Edit Phone
-		  11.	Exit
+		  1. Generate new password
+		  2. Set lock for user
+		  3. Edit Status
+		  4. Edit First Name
+		  5. Edit Last name
+		  6. Edit Street Address
+		  7. Edit City
+		  8. Edit State
+		  9. Enter Zip code
+		  10. Edit Phone
+		  11. Exit
 		    a)	If option 1 is selected a new randomly generated password is created.
 		    b)	If option 2 is selected you will be prompted to enter true to lock the user account or false to not lock the user’s                     account
 		    c)	If option 3 is selected you will be prompted to enter Manager, associate, or member to set the new status of the member
@@ -171,47 +173,47 @@ Thara Larkins has checked in.
             
 If option 4 (edit book) is selected you will be prompted to enter the book’s isbn 
 
-        1.	Then you will be prompted to choose 1 of the following:
-        a.	Edit title.
-        b.	Edit author.
-        c.	edit ISBN
-        d.	edit publishing year
-        e.	edit keywords (separated by commas)
-        f.	edit inventory number
-        g.	exit
+        1. Then you will be prompted to choose 1 of the following:
+			a. Edit title.
+			b. Edit author.
+			c. edit ISBN
+			d. edit publishing year
+			e. edit keywords (separated by commas)
+			f. edit inventory number
+			g. exit
         
-2.	if option 1 is selected you will be prompted to enter the Title
+1.	if option 1 is selected you will be prompted to enter the Title
 
-3.	if option 2 is selected you will be prompted to enter the Author
+2.	if option 2 is selected you will be prompted to enter the Author
 
-4.	if option 3 is selected you will be prompted to enter the ISBN
+3	if option 3 is selected you will be prompted to enter the ISBN
 
-5.	if option 4 is selected you will be prompted to enter the publishing year
+4.	if option 4 is selected you will be prompted to enter the publishing year
 
-6.	if option 5 is selected you will be prompted to enter the keywords
+5.	if option 5 is selected you will be prompted to enter the keywords
 
-7.	if option 6 is selected you will be prompted to enter the inventory number
+6.	if option 6 is selected you will be prompted to enter the inventory number
 
-8.	if option 7 is selected you will exit the menu
+7.	if option 7 is selected you will exit the menu
 
 If option 5 (Reactivate User) is selected you will be prompted to enter the user’s pin number that you want to reactivate.
 
-      1.	If the pin does not match a pin in the database, the user will be prompted to enter another pin.
-      2.	If the pin exists, the user will be unlocked (locked status set to false)
+      1. If the pin does not match a pin in the database, the user will be prompted to enter another pin.
+      2. If the pin exists, the user will be unlocked (locked status set to false)
       
 If option 6 (Display User info) is selected you will be prompted to:
 
-    1.	Enter the user’s pin
-        1.	if user pin does not exist in the database, the user will be prompted to enter another pin.
-        2.	if user pin is in the database, the corresponding user’s information will be displayed.
+    1. Enter the user’s pin
+        1. if user pin does not exist in the database, the user will be prompted to enter another pin.
+        2. if user pin is in the database, the corresponding user’s information will be displayed.
 If option 7 (Check out book for member) is selected you will be prompted to enter the user’s Library card (Aka: user pin)
 
-        1.	If the pin does not exist, the program will display that the pin is not in the database and the user will return to the main              menu.
-        2.	If the pin does exist and the user is locked out, you will be prompted of the user being locked out and to contact a manager
-        3.	If the pin does exist and the user is not locked out, you will be prompted to enter the ISBN of the book to check out	
-              1.	If the book is not in the database, the user will be sent back to the main menu
-              2.	If the book does exist in the database, the book will be checked out if available.
-              3.	If the book exists in the database but all are currently checked out, the user will be asked if the book would like to                   be placed on hold.
+        1. If the pin does not exist, the program will display that the pin is not in the database and the user will return to the main              menu.
+        2. If the pin does exist and the user is locked out, you will be prompted of the user being locked out and to contact a manager
+        3. If the pin does exist and the user is not locked out, you will be prompted to enter the ISBN of the book to check out	
+              1. If the book is not in the database, the user will be sent back to the main menu
+              2. If the book does exist in the database, the book will be checked out if available.
+              3. If the book exists in the database but all are currently checked out, the user will be asked if the book would like to                   be placed on hold.
                     a.	if yes, the book will go in the book queue.
                     b.	if no, the user will return to the main menu.
         4. If the book is there, and you have 10 books checked out, you will be denied the ability to checkout
@@ -234,7 +236,7 @@ If option 9 (exit)  is selected the session will exit
 
 5. if 2 is selected, you will be prompted to enter a keyword from the book and the books information shall be displayed
 
-        A.	if the keyword does not exist in any entry in the database, no information will be displayed and the user will be re-                   prompted for search options.
+        A. if the keyword does not exist in any entry in the database, no information will be displayed and the user will be re-                   prompted for search options.
 	
 6. if option 3 is selected you will exit the menu
 
