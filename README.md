@@ -1,8 +1,8 @@
 # group3
-Thara Larkins has checked in.
 Amanda Mitchell has checked in.  
 Zackery Weeks has checked in.  
-Brandon Corbett has checked in.
+Brandon Corbett has checked in.  
+Thara Larkins has checked in.
 
 
 1.	Our program requires the MariaDB JDBC jar file in order to run correctly. It can be obtained by following the download link listed       below.
