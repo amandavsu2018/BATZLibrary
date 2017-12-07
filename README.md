@@ -4,7 +4,6 @@ Zackery Weeks has checked in.
 Brandon Corbett has checked in.
 Thara Larkins has checked in.
 
-
 1.	Our program requires the MariaDB JDBC jar file in order to run correctly. It can be obtained by following the download link listed       below.
       1.	https://downloads.mariadb.com/Connectors/java/connector-java-2.2.0/mariadb-java-client-2.2.0.jar
       2.	In Eclipse, click on Project -> Properties -> Java Build Path -> Add External JARs.
